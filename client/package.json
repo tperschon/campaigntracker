@@ -1,14 +1,14 @@
-<<<<<<< HEAD
 {
   "name": "campaigntracker",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@apollo/client": "^3.5.8",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
-    "concurrently": "^7.4.0",
-    "mongoose": "^6.6.1",
+    "graphql": "^14.6.0",
+    "jwt-decode": "^2.2.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
@@ -16,7 +16,6 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "develop": "concurrently \"cd server && npm run watch\" \"cd client && npm start\"",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -40,4 +39,3 @@
     ]
   }
 }
-
