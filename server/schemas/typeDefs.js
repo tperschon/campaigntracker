@@ -69,7 +69,7 @@ const typeDefs = gql`
     addItem(name: String!, canSee: [Int], campaign: Int!, notes: [Note]): Item
     addPlace(name: String!, canSee: [Int], campaign: Int!, notes: [Note]): Place
     addNote(name: String!, isChildOf: Int!, canSee: [Int], text: String!): Note
-    changePassword(userName: String, email: String, password: String): User
+    changePassword(newPassword: String): User
     login(email: String!, password: String!): Auth
   }
 `;
