@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Product, Category, Order } = require('../models');
+const { User, Note, Campaign } = require('../models');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
@@ -14,8 +14,10 @@ const resolvers = {
         return user;
         }
           throw new AuthenticationError('Not logged in')
-  
- },
+    },
+    note: async (parent, { id }) => {
+      
+    },
 
  Mutation: {
     addUser: async (parent, args) => {
