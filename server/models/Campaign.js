@@ -8,9 +8,9 @@ export default mongoose.model('Campaign', new Schema({
     trim: true
   },
   admins: {
-    type: Array
+    type: [Number]
   },
   players: {
-    type: Array
+    type: [Number]
   },
 }));

@@ -24,7 +24,7 @@ const userSchema = new Schema({
     }
   },
   campaigns: {
-    type: Array
+    type: [Number]
   }
 });
 // salt/hash our password before saving it to db
