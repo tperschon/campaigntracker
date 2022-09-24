@@ -44,9 +44,10 @@ function App() {
               element={<Home />}
             />
             <Route
-              path="/"
+              path="/login"
               element={<Login />}
             />
+            {/* /campaigns/:id? */}
           </Routes>
         </div>
       </Router>

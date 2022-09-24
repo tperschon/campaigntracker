@@ -1,6 +1,8 @@
 import React from 'react';
 
-const Campaigns = () => {
+// File name may need to be changed to be more accurate.
+
+const Campaign = () => {
   return (
     // Stand-in CSS
     <div className="container">
