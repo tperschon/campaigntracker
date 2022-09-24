@@ -1,5 +1,5 @@
 import React from "react";
-import Auth from "../../utils/auth";
+import Auth from "../../utils/Auth";
 import { Link } from "react-router-dom";
 
 // Nav component
@@ -27,6 +27,7 @@ function Nav() {
   }
 
   return (
+    // Header contains the nav element.
     <header className="flex-row px-1">
       <h1>
         <Link to="/">
