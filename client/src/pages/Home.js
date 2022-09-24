@@ -5,7 +5,7 @@ const Home = () => {
   if (Auth.loggedIn()) {
     return (
       <div className="container">
-        {/* Return differently if not logged in. */}
+        {/* Return differently if logged in vs not. */}
       </div>
     )
   }

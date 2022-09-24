@@ -19,10 +19,12 @@ function Nav() {
       )
     } else {
       // if NOT logged in
-      <ul className="flex-row">
-        {/* Links to: Sign-up/Log-in *Can be one page, realistically.*
-            Otherwise, nothing else? */}
-      </ul>
+      return (
+        <ul className="flex-row">
+          {/* Links to: Sign-up/Log-in *Can be one page, realistically.*
+              Otherwise, nothing else? */}
+        </ul>
+      )
     }
   }
 
