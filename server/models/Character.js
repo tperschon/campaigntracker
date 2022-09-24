@@ -1,5 +1,6 @@
 // import dependencies
 import mongoose, { Schema } from 'mongoose';
+import Note from './Note';
 // export the model with the schema filled in
 export default mongoose.model('Character', new Schema({
   name: {
@@ -13,4 +14,5 @@ export default mongoose.model('Character', new Schema({
   campaign: {
     type: Number
   },
+  notes: [Note.schema]
 }));

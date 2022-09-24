@@ -1,8 +1,6 @@
 // import dependencies
 import mongoose, { Schema } from 'mongoose';
 import bcrypt from 'bcrypt';
-import Note from './Note';
-import Campaign from './Campaign';
 // set up our userSchema
 const userSchema = new Schema({
   userName: {
@@ -25,8 +23,9 @@ const userSchema = new Schema({
       message: 'Password must have at least: 1 uppercase letter, 1 lowercase letter, 1 number, and 1 special character.'
     }
   },
-  characters: [Note.schema],
-  campaigns: [Campaign.schema]
+  campaigns: {
+    type: Array
+  }
 });
 // salt/hash our password before saving it to db
 userSchema.pre('save', async function (next) {

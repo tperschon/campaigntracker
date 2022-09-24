@@ -7,9 +7,6 @@ export default mongoose.model('Note', new Schema({
     required: true,
     trim: true
   },
-  isChildOf: {
-    type: Number,
-  },
   canSee: {
     type: Array,
   },

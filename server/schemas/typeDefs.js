@@ -7,6 +7,7 @@ const typeDefs = gql`
     name: String
     canSee: [Int]
     campaign: Int
+    notes: [Note]
   }
 
   type Place {
@@ -14,6 +15,7 @@ const typeDefs = gql`
     name: String
     canSee: [Int]
     campaign: Int
+    notes: [Note]
   }
 
   type Item {
@@ -21,11 +23,11 @@ const typeDefs = gql`
     name: String
     canSee: [Int]
     campaign: Int
+    notes: [Note]
   }
 
   type Note {
     _id: ID
-    isChildOf: Int
     canSee: [Int]
     text: String
   }
@@ -34,7 +36,6 @@ const typeDefs = gql`
     _id: ID
     userName: String
     email: String
-    characters: [Int]
     campaigns: [Int]
   }
 
@@ -52,16 +53,22 @@ const typeDefs = gql`
 
   type Query {
     user: User
-    note(_id: ID!): Note
-    getSubnotes(note: ID!): [Note]
+    campaign: Campaign
     getUserCampaigns(user: ID!): [Campaign]
-    getUserCharacters(user: ID!): [Note]
-    getCampaignNotes(campaign: ID!, user: ID!): [Note]
+    characters(campaign: ID!): [Character]
+    places(campaign: ID!): [Place]
+    items(campaign: ID!): [Item]
+    getCharacterNotes(character: ID!): [Note]
+    getItemNotes(item: ID!): [Note]
+    getPlaceNotes(place: ID!): [Note]
   }
 
   type Mutation {
     addUser(firstName: String!, lastName: String!, email: String!, password: String!): Auth
-    addNote(noteType: String!, isChildOf: Int, isParentOf: Int, canSee: [Int], campaign: Int, text: String!): Note
+    addCharacter(name: String!, canSee: [Int], campaign: Int!, notes: [Note]): Character
+    addItem(name: String!, canSee: [Int], campaign: Int!, notes: [Note]): Item
+    addPlace(name: String!, canSee: [Int], campaign: Int!, notes: [Note]): Place
+    addNote(name: String!, isChildOf: Int!, canSee: [Int], text: String!): Note
     changePassword(userName: String, email: String, password: String): User
     login(email: String!, password: String!): Auth
   }
