@@ -1,16 +1,18 @@
 // import dependencies
 import mongoose, { Schema } from 'mongoose';
+import Note from './Note';
 // export the model with the schema filled in
-export default mongoose.model('Campaign', new Schema({
+export default mongoose.model('Item', new Schema({
   name: {
     type: String,
     required: true,
     trim: true
   },
-  admins: {
-    type: Array
+  canSee: {
+    type: Array,
   },
-  players: {
-    type: Array
+  campaign: {
+    type: Number
   },
+  notes: [Note.schema]
 }));

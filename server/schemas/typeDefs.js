@@ -2,10 +2,33 @@ import { gql } from 'apollo-server-express';
 
 const typeDefs = gql`
 
+  type Character {
+    _id: ID
+    name: String
+    canSee: [Int]
+    campaign: Int
+    notes: [Note]
+  }
+
+  type Place {
+    _id: ID
+    name: String
+    canSee: [Int]
+    campaign: Int
+    notes: [Note]
+  }
+
+  type Item {
+    _id: ID
+    name: String
+    canSee: [Int]
+    campaign: Int
+    notes: [Note]
+  }
+
   type Note {
     _id: ID
-    noteType: String
-    isChildOf: [Int]
+    canSee: [Int]
     text: String
   }
 
@@ -13,7 +36,7 @@ const typeDefs = gql`
     _id: ID
     userName: String
     email: String
-    characters: [Note]
+    campaigns: [Int]
   }
 
   type Campaign {
@@ -30,16 +53,22 @@ const typeDefs = gql`
 
   type Query {
     user: User
-    note(_id: ID!): Note
+    campaign: Campaign
     getUserCampaigns(user: ID!): [Campaign]
-    getUserCharacters(user: ID!): [Note]
-    getCampaignPlayers(campaign: ID!, user: ID!): [Note]
-    getCampaignAdmins(campaign: ID!, user: ID!): [Note]
+    characters(campaign: ID!): [Character]
+    places(campaign: ID!): [Place]
+    items(campaign: ID!): [Item]
+    getCharacterNotes(character: ID!): [Note]
+    getItemNotes(item: ID!): [Note]
+    getPlaceNotes(place: ID!): [Note]
   }
 
   type Mutation {
     addUser(firstName: String!, lastName: String!, email: String!, password: String!): Auth
-    addNote(noteType: String!, isChildOf: [Int], text: String!): Note
+    addCharacter(name: String!, canSee: [Int], campaign: Int!, notes: [Note]): Character
+    addItem(name: String!, canSee: [Int], campaign: Int!, notes: [Note]): Item
+    addPlace(name: String!, canSee: [Int], campaign: Int!, notes: [Note]): Place
+    addNote(name: String!, isChildOf: Int!, canSee: [Int], text: String!): Note
     changePassword(userName: String, email: String, password: String): User
     login(email: String!, password: String!): Auth
   }
