@@ -6,6 +6,9 @@ const typeDefs = gql`
     _id: ID
     noteType: String
     isChildOf: [Int]
+    isParentOf: [Int]
+    canSee: [Int]
+    campaign: Int
     text: String
   }
 
@@ -14,6 +17,7 @@ const typeDefs = gql`
     userName: String
     email: String
     characters: [Note]
+    campaigns: [Campaign]
   }
 
   type Campaign {
@@ -31,10 +35,10 @@ const typeDefs = gql`
   type Query {
     user: User
     note(_id: ID!): Note
+    getSubnotes(note: ID!): [Note]
     getUserCampaigns(user: ID!): [Campaign]
     getUserCharacters(user: ID!): [Note]
-    getCampaignPlayers(campaign: ID!, user: ID!): [Note]
-    getCampaignAdmins(campaign: ID!, user: ID!): [Note]
+    getCampaignNotes(campaign: ID!, user: ID!): [Note]
   }
 
   type Mutation {

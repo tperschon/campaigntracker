@@ -16,7 +16,15 @@ export default mongoose.model('Note', new Schema({
   isChildOf: {
     type: Array,
   },
-  campaign: [Campaign.schema],
+  isParentOf: {
+    type: Array,
+  },
+  canSee: {
+    type: Array,
+  },
+  campaign: {
+    type: Number
+  },
   text: {
     type: String
   },

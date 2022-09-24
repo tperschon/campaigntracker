@@ -16,7 +16,67 @@ const resolvers = {
           throw new AuthenticationError('Not logged in')
     },
     note: async (parent, { id }) => {
-      
+      const note = await Note.findById(id);
+      if (!note) {
+        throw new Error('Note not found.')
+      };
+      return note;
+    },
+    getSubnotes: async (parent, { noteId }) => {
+      const note = await Note.findById(noteId);
+      if (!note) {
+        throw new Error('Note not found.');
+      };
+      const subs = await Note.find(
+        {'_id': { $in: note.isParentOf }}
+      );
+      if (!subs) {
+        throw new Error('No subnotes found.')
+      } else return subs;
+    },
+    getUserCampaigns: async (parent, { userId }) => {
+      const user = await User.findById(userId);
+      if (!user.campaigns) {
+        throw new Error('User not found or no campaigns for that user.');
+      };
+      const campaigns = await Campaign.find(
+        {'_id': { $in: user.campaigns }}
+      );
+      if (!campaigns) {
+        throw new Error('User not found or no campaigns for that user.');
+      };
+      return campaigns;
+    },
+    getUserCharacters: async (parent, { userId }) => {
+      const user = await User.findById(userId);
+      if (!user.characters) {
+        throw new Error('User not found or no characters for that user.');
+      };
+      const characters = await Campaign.find(
+        {'_id': { $in: user.characters }}
+      );
+      if (!characters) {
+        throw new Error('User not found or no characters for that user.');
+      };
+      return characters;
+    },
+    getCampaignNotes: async (parent, { campaign, userId }) => {
+      const campaign = await Campaign.findById(campaign);
+      if (!campaign) {
+        throw new Error('No campaign found by that id.');
+      };
+      let notes;
+      if (campaign.admins.includes(userId)) {
+        notes = await Note.find(
+          {'_id': { $in: campaign._id }}
+        );
+      } else if (campaign.players.includes(userId)) {
+        notes = await Note.find(
+          {'_id': { $in: campaign._id }},
+          {'canSee': { $in: userId }}
+        );
+      } else throw new Error('An error has occurred while finding information about that campaign.')
+      return notes;
     },
 
  Mutation: {
