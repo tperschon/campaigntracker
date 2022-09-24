@@ -1,6 +1,5 @@
 // import dependencies
 import mongoose, { Schema } from 'mongoose';
-import User from './User';
 // export the model with the schema filled in
 export default mongoose.model('Campaign', new Schema({
   name: {
@@ -8,6 +7,10 @@ export default mongoose.model('Campaign', new Schema({
     required: true,
     trim: true
   },
-  admins: [User.schema],
-  players: [User.schema],
+  admins: {
+    type: Array
+  },
+  players: {
+    type: Array
+  },
 }));

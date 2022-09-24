@@ -2,13 +2,31 @@ import { gql } from 'apollo-server-express';
 
 const typeDefs = gql`
 
-  type Note {
+  type Character {
     _id: ID
-    noteType: String
-    isChildOf: [Int]
-    isParentOf: [Int]
+    name: String
     canSee: [Int]
     campaign: Int
+  }
+
+  type Place {
+    _id: ID
+    name: String
+    canSee: [Int]
+    campaign: Int
+  }
+
+  type Item {
+    _id: ID
+    name: String
+    canSee: [Int]
+    campaign: Int
+  }
+
+  type Note {
+    _id: ID
+    isChildOf: Int
+    canSee: [Int]
     text: String
   }
 
@@ -16,8 +34,8 @@ const typeDefs = gql`
     _id: ID
     userName: String
     email: String
-    characters: [Note]
-    campaigns: [Campaign]
+    characters: [Int]
+    campaigns: [Int]
   }
 
   type Campaign {

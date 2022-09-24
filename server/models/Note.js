@@ -1,6 +1,5 @@
 // import dependencies
 import mongoose, { Schema } from 'mongoose';
-import Campaign from './Campaign';
 // export the model with the schema filled in
 export default mongoose.model('Note', new Schema({
   name: {
@@ -8,22 +7,11 @@ export default mongoose.model('Note', new Schema({
     required: true,
     trim: true
   },
-  // information, character, item, place
-  noteType: {
-    type: String,
-    require: true,
-  },
   isChildOf: {
-    type: Number,
-  },
-  isParentOf: {
     type: Number,
   },
   canSee: {
     type: Array,
-  },
-  campaign: {
-    type: Number
   },
   text: {
     type: String

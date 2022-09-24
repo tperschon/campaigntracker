@@ -7,7 +7,6 @@ export default mongoose.model('Item', new Schema({
     required: true,
     trim: true
   },
-  // information, character, item, place
   canSee: {
     type: Array,
   },
