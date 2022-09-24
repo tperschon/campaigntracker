@@ -14,7 +14,7 @@ const resolvers = {
 
         return user;
       }
-      throw new AuthenticationError('Not logged in')
+      throw new AuthenticationError('Not logged in');
     },
     campaign: async (parents, args, context) => {
       if (context.campaign) {
@@ -114,6 +114,13 @@ const resolvers = {
       return note;
     },
     changePassword: async (parent, args, context) => {
+      if (context.user) {
+        // Does this work? Password needs to be hashed
+        //const user = await User.findOneAndUpdate({_id: user.id},{password: context.password},{new: true})
+
+        return user;
+      }
+      throw new AuthenticationError('Not logged in');
       // need code to allow authenticated user to change password
     },
     login: async (parent, { email, password }) => {
