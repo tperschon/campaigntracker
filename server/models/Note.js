@@ -14,10 +14,10 @@ export default mongoose.model('Note', new Schema({
     require: true,
   },
   isChildOf: {
-    type: Array,
+    type: Number,
   },
   isParentOf: {
-    type: Array,
+    type: Number,
   },
   canSee: {
     type: Array,
