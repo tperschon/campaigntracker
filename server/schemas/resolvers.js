@@ -2,6 +2,7 @@ import { AuthenticationError } from 'apollo-server-express';
 import { User, Campaign, Character, Item, Place, Note } from '../models';
 import { signToken } from '../utils/auth';
 
+
 export default {
   Query: {
     // get the user by the user.id in context

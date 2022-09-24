@@ -8,7 +8,7 @@ export default mongoose.model('Note', new Schema({
     trim: true
   },
   canSee: {
-    type: Array,
+    type: [Number],
   },
   text: {
     type: String

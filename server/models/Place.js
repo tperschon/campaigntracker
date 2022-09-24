@@ -9,7 +9,7 @@ export default mongoose.model('Place', new Schema({
     trim: true
   },
   canSee: {
-    type: Array,
+    type: [Number],
   },
   campaign: {
     type: Number
