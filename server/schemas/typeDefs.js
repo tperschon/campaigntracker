@@ -29,22 +29,18 @@ const typeDefs = gql`
   }
 
   type Query {
+    user: User
+    note(_id: ID!): Note
     getUserCampaigns(user: ID!): [Campaign]
     getUserCharacters(user: ID!): [Note]
-    getCampaignPlayers(campaign: ID!): [Note]
-    user(_id: ID!): User
-
-    players: [User]
-    note(_id: ID!): Note
-    order(_id: ID!): Order
+    getCampaignPlayers(campaign: ID!, user: ID!): [Note]
+    getCampaignAdmins(campaign: ID!, user: ID!): [Note]
   }
 
   type Mutation {
-    addNote(noteType: String!, isChildOf: [Int], text: String!): Note
     addUser(firstName: String!, lastName: String!, email: String!, password: String!): Auth
-    addOrder(products: [ID]!): Order
-    updateUser(firstName: String, lastName: String, email: String, password: String): User
-    updateProduct(_id: ID!, quantity: Int!): Product
+    addNote(noteType: String!, isChildOf: [Int], text: String!): Note
+    changePassword(userName: String, email: String, password: String): User
     login(email: String!, password: String!): Auth
   }
 `;
