@@ -1,0 +1,1 @@
+// component for item notes when an item is clicked

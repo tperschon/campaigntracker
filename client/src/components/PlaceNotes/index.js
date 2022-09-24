@@ -1,0 +1,1 @@
+// component for place notes when a place is clicked
