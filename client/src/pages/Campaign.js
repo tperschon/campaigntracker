@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Campaigns = () => {
+const Campaign = () => {
   return (
     // Stand-in CSS
     <div className="container">
