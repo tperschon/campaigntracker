@@ -92,8 +92,14 @@ const resolvers = {
     addPlayerToCampaign: async (parent, { userId, campaignId }, context) => {
       // get campaign ID from context if available and not specified
       const campaign_id = campaignId || context.campaign.id;
-      const campaign = await Campaign.findOneAndUpdate({_id: campaign_id},{players: players.push(userId)},{new: true});
-      return campaign;
+      const campaign = await Campaign.findOne({_id: campaign_id});
+      const campaignPlayers = campaign.players;
+      campaignPlayers.push(userId);
+      const updatedCampaign = await Campaign.findOneAndUpdate(
+        {_id: campaign_id},
+        {players: campaignPlayers},
+        {new: true});
+      return updatedCampaign;
     },
     addNote: async (parent, { noteName, noteText }, context) => {
       const note = await Note.create({
@@ -109,11 +115,23 @@ const resolvers = {
       return removedNote;
     },
     addPlayerToNote: async (parent, { noteId, userId }, context) => {
-      const note = await Note.findOneAndUpdate({_id: noteId},{canSee: canSee.push(userId)},{new: true});
-      return note;
+      const note = await Note.findOne({_id: noteId});
+      const noteCanSee = note.canSee;
+      noteCanSee.push(userId)
+      const updatedNote = await Note.findOneAndUpdate(
+        {_id: noteId},
+        {canSee: noteCanSee},
+        {new: true});
+      return updatedNote;
     },
     removePlayerFromNote: async (parent, { noteId, userId }, context) => {
-      const updatedNote = await Note.findOneAndUpdate({_id: noteId},{canSee: canSee.filter(player => player != userId)},{new: true});
+      const note = await Note.findOne({_id: noteId});
+      const noteCanSee = note.canSee;
+      noteCanSee.filter(player => player != userId);
+      const updatedNote = await Note.findOneAndUpdate(
+        {_id: noteId},
+        {canSee: noteCanSee},
+        {new: true});
       return updatedNote;
     }
   },
