@@ -8,9 +8,13 @@ export default mongoose.model('Campaign', new Schema({
     trim: true
   },
   admins: {
-    type: [Number]
+    type: Number
   },
   players: {
     type: [Number]
   },
+  jCode: {
+    type: String,
+    required: true
+  }
 }));

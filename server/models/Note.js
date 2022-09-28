@@ -13,4 +13,7 @@ export default mongoose.model('Note', new Schema({
   text: {
     type: String
   },
+  campaign: {
+    type: Number
+  }
 }));
