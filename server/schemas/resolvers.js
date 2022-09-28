@@ -51,7 +51,11 @@ const resolvers = {
           { 'campaign': { $in: context.campaign._id } },
           { 'canSee': { $in: context.user.id } }
         );
-      } else throw new Error('Not in Campaign.')
+      } else throw new Error('Not in Campaign.');
+    },
+    getCampaignCode: async (parents, { campaignId }, context) => {
+      const campaign = Campaign.findOne({_id: campaignId});
+      return campaign.jCode;
     },
   },
   Mutation: {

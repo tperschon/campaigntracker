@@ -36,6 +36,7 @@ const typeDefs = gql`
     note(_id: noteId): Note
     getUserCampaigns(user: ID!): [Campaign]
     notes: [Note]
+    getCampaignCode(campaign: ID!): String
   }
 
   type Mutation {
