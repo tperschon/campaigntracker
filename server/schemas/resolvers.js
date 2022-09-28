@@ -8,7 +8,7 @@ const resolvers = {
     // get the user by the user.id in context
     user: async (parent, args, context) => {
       if (context.user) {
-        const user = await User.findById(context.user.id).populate({
+        const user = await User.findById(context.user._id).populate({
           path: '',
           populate: '',
         });
@@ -20,7 +20,7 @@ const resolvers = {
     // get the campaign by the campaign.id in context
     campaign: async (parents, args, context) => {
       if (context.campaign) {
-        const campaign = await Campaign.findById(context.campaign.id);
+        const campaign = await Campaign.findById(context.campaign._id);
         return campaign;
       } else throw new Error('Campaign not found.');
     },
@@ -49,7 +49,7 @@ const resolvers = {
       if (context.campaign._id) {
         const notes = await Note.find(
           { 'campaign': { $in: context.campaign._id } },
-          { 'canSee': { $in: context.user.id } }
+          { 'canSee': { $in: context.user._id } }
         );
       } else throw new Error('Not in Campaign.');
     },
@@ -95,7 +95,7 @@ const resolvers = {
     },
     addPlayerToCampaign: async (parent, { userId, campaignId }, context) => {
       // get campaign ID from context if available and not specified
-      const campaign_id = campaignId || context.campaign.id;
+      const campaign_id = campaignId || context.campaign._id;
       const campaign = await Campaign.findOne({_id: campaign_id});
       const campaignPlayers = campaign.players;
       campaignPlayers.push(userId);
@@ -108,9 +108,9 @@ const resolvers = {
     addNote: async (parent, { noteName, noteText }, context) => {
       const note = await Note.create({
         name: noteName,
-        canSee: [context.campaign.admin],
+        canSee: [context.campaign._admin],
         text: noteText,
-        campaign: context.campaign.id
+        campaign: context.campaign._id
       });
       return note;
     },
