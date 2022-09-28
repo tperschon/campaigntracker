@@ -1,5 +1,6 @@
 // import dependencies
 const mongoose = require('mongoose'); 
+const generateCode = require('../utils/generateCode');
 
 const { Schema } = mongoose;
 
@@ -18,7 +19,8 @@ const campaignSchema = new Schema({
   },
   jCode: {
     type: String,
-    required: true
+    required: true,
+    default: generateCode(),
   }
 });
 
