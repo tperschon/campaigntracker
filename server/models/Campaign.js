@@ -1,7 +1,10 @@
 // import dependencies
-import mongoose, { Schema } from 'mongoose';
+const mongoose = require('mongoose'); 
+
+const { Schema } = mongoose;
+
 // export the model with the schema filled in
-export default mongoose.model('Campaign', new Schema({
+const campaignSchema = new Schema({
   name: {
     type: String,
     required: true,
@@ -13,4 +16,8 @@ export default mongoose.model('Campaign', new Schema({
   players: {
     type: [Number]
   },
-}));
+});
+
+const Campaign = mongoose.model('Campaign', campaignSchema);
+
+module.exports = Campaign;
