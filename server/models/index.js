@@ -1,9 +1,9 @@
 // consolidate models
-import User from './User';
-import Campaign from './Campaign';
-import Character from './Character';
-import Item from './Item';
-import Place from './Place';
-import Note from './Note';
+const User = require('./User');
+const Campaign = require('./Campaign');
+const Character = require('./Character');
+const Item = require('./Item');
+const Place = require('./Place');
+const Note = require('./Note');
 
-export default { User, Campaign, Character, Item, Place, Note };
+module.exports = { User, Campaign, Character, Item, Place, Note };

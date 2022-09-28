@@ -1,8 +1,9 @@
-import { AuthenticationError } from 'apollo-server-express';
-import { User, Campaign, Note } from '../models';
-import { signToken } from '../utils/auth';
+const { AuthenticationError } = require('apollo-server-express');
+const { User, Campaign, Note } = require('../models');
+const { signToken } = require('../utils/auth');
 
-export default {
+
+const resolvers = {
   Query: {
     // get the user by the user.id in context
     user: async (parent, args, context) => {
@@ -52,7 +53,7 @@ export default {
         );
       } else throw new Error('Not in Campaign.')
     },
-
+  },
   Mutation: {
     // adds a user and signs them in via token
     addUser: async (parent, args) => {
@@ -116,5 +117,6 @@ export default {
       return updatedNote;
     }
   },
-  },
 };
+
+module.exports = resolvers;

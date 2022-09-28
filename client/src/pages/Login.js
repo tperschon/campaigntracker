@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 // Link will be used in the event we make a signup page.
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import { LOGIN } from '../utils/mutations';
 import Auth from '../utils/Auth';
 
