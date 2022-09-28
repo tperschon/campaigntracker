@@ -12,7 +12,8 @@ function Nav() {
     if (Auth.loggedIn()) {
       return (
         // CSS classes are currently placeholder
-        <ul className="flex-row">
+        <ul className="nav-list">
+          <li>Campaigns</li>
           {/* If logged in, links to? 
               Guessing, campaigns--or characters? */}
         </ul>
@@ -20,7 +21,8 @@ function Nav() {
     } else {
       // if NOT logged in
       return (
-        <ul className="flex-row">
+        <ul className="nav-list">
+          <li><Link className="nav-link" to="/login">Login</Link></li>
           {/* Links to: Sign-up/Log-in *Can be one page, realistically.*
               Otherwise, nothing else? */}
         </ul>
@@ -30,9 +32,9 @@ function Nav() {
 
   return (
     // Header contains the nav element.
-    <header className="flex-row px-1">
-      <h1>
-        <Link to="/">
+    <header className="flex-header">
+      <h1 className="main-heading">
+        <Link className="main-heading-link" to="/">
           Campaign Tracker
         </Link>
       </h1>
