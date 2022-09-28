@@ -1,8 +1,10 @@
 // import dependencies
-import mongoose, { Schema } from 'mongoose';
-import Note from './Note';
+const mongoose = require('mongoose'); 
+
+const { Schema } = mongoose;
+const Note = require('./Note');
 // export the model with the schema filled in
-export default mongoose.model('Item', new Schema({
+const itemSchema = new Schema({
   name: {
     type: String,
     required: true,
@@ -15,4 +17,8 @@ export default mongoose.model('Item', new Schema({
     type: Number
   },
   notes: [Note.schema]
-}));
+});
+
+const Item = mongoose.model('Item', itemSchema);
+
+module.exports = Item;

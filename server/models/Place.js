@@ -1,8 +1,11 @@
 // import dependencies
-import mongoose, { Schema } from 'mongoose';
-import Note from './Note';
+const mongoose = require('mongoose'); 
+
+const { Schema } = mongoose;
+const Note = require('./Note');
+
 // export the model with the schema filled in
-export default mongoose.model('Place', new Schema({
+const placeSchema = new Schema({
   name: {
     type: String,
     required: true,
@@ -15,4 +18,8 @@ export default mongoose.model('Place', new Schema({
     type: Number
   },
   notes: [Note.schema]
-}));
+});
+
+const Place = mongoose.model('Place', placeSchema);
+
+module.exports = Place;

@@ -1,9 +1,9 @@
-import { AuthenticationError } from 'apollo-server-express';
-import { User, Campaign, Character, Item, Place, Note } from '../models';
-import { signToken } from '../utils/auth';
+const { AuthenticationError } = require('apollo-server-express');
+const { User, Campaign, Character, Item, Place, Note } = require('../models');
+const { signToken } = require('../utils/auth');
 
 
-export default {
+const resolvers = {
   Query: {
     // get the user by the user.id in context
     user: async (parent, args, context) => {
@@ -52,7 +52,7 @@ export default {
           { 'campaign': { $in: campaign._id } },
           { 'canSee': { $in: context.user.id } }
         );
-      } else throw new Error('Error retrieving characters from campaign.');
+      } else throw new Error('Error retrieving characters = require()campaign.');
     },
     // get places that are in a campaign, retrieving different information based on the user.id in context
     places: async (parent, { campaignId }, context) => {
@@ -67,7 +67,7 @@ export default {
           { 'campaign': { $in: campaign._id } },
           { 'canSee': { $in: context.user.id } }
         )
-      } else throw new Error('Error retrieving places from campaign.');
+      } else throw new Error('Error retrieving places = require()campaign.');
     },
     // get items that are in a campaign, retrieving different information based on the user.id in context
     items: async (parent, { campaignId }, context) => {
@@ -82,7 +82,7 @@ export default {
           { 'campaign': { $in: campaign._id } },
           { 'canSee': { $in: context.user.id } }
         )
-      } else throw new Error('Error retrieving places from campaign.');
+      } else throw new Error('Error retrieving places = require()campaign.');
     },
     // get notes the notes of a character by retrieving a character by its id and returning only the notes array
     getCharacterNotes: async (parent, { characterId }) => {
@@ -99,7 +99,7 @@ export default {
       const place = Place.findById(placeId).populate('note');
       return place.notes;
     },
-
+  },
   Mutation: {
     // adds a user and signs them in via token
     addUser: async (parent, args) => {
@@ -127,7 +127,7 @@ export default {
       const note = await Note.create(args);
       return note;
     },
-    // changes a user's password by finding the user from context and updating it with the newPassword argument
+    // changes a user's password by finding the user = require()context and updating it with the newPassword argument
     changePassword: async (parent, { newPassword }, context) => {
       if (context.user) {
         // Does this work? Password needs to be hashed
@@ -156,5 +156,6 @@ export default {
       return { token, user };
     },
   },
-  },
 };
+
+module.exports = resolvers;
