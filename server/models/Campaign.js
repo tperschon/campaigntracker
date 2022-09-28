@@ -1,5 +1,6 @@
 // import dependencies
 const mongoose = require('mongoose'); 
+const generateCode = require('../utils/generateCode');
 
 const { Schema } = mongoose;
 
@@ -11,11 +12,16 @@ const campaignSchema = new Schema({
     trim: true
   },
   admins: {
-    type: [Number]
+    type: Number
   },
   players: {
     type: [Number]
   },
+  jCode: {
+    type: String,
+    required: true,
+    default: generateCode(),
+  }
 });
 
 const Campaign = mongoose.model('Campaign', campaignSchema);

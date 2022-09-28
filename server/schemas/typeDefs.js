@@ -2,34 +2,12 @@ const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
 
-  type Character {
-    _id: ID
-    name: String
-    canSee: [Int]
-    campaign: Int
-    notes: [Note]
-  }
-
-  type Place {
-    _id: ID
-    name: String
-    canSee: [Int]
-    campaign: Int
-    notes: [Note]
-  }
-
-  type Item {
-    _id: ID
-    name: String
-    canSee: [Int]
-    campaign: Int
-    notes: [Note]
-  }
-
   type Note {
     _id: ID
+    name: String
     canSee: [Int]
     text: String
+    campaign: Int
   }
 
   type User {
@@ -42,8 +20,9 @@ const typeDefs = gql`
   type Campaign {
     _id: ID
     name: String
-    admins: [User]
+    admins: User
     players: [User]
+    jCode: String
   }
 
   type Auth {
@@ -54,23 +33,22 @@ const typeDefs = gql`
   type Query {
     user: User
     campaign: Campaign
+    note(_id: noteId): Note
     getUserCampaigns(user: ID!): [Campaign]
-    characters(campaign: ID!): [Character]
-    places(campaign: ID!): [Place]
-    items(campaign: ID!): [Item]
-    getCharacterNotes(character: ID!): [Note]
-    getItemNotes(item: ID!): [Note]
-    getPlaceNotes(place: ID!): [Note]
+    notes: [Note]
+    getCampaignCode(campaign: ID!): String
   }
 
   type Mutation {
     addUser(firstName: String!, lastName: String!, email: String!, password: String!): Auth
-    addCharacter(name: String!, canSee: [Int], campaign: Int!, notes: [Note]): Character
-    addItem(name: String!, canSee: [Int], campaign: Int!, notes: [Note]): Item
-    addPlace(name: String!, canSee: [Int], campaign: Int!, notes: [Note]): Place
-    addNote(name: String!, isChildOf: Int!, canSee: [Int], text: String!): Note
-    changePassword(newPassword: String): User
+    changePassword(newPassword: String): Auth
     login(email: String!, password: String!): Auth
+    addPlayerToCampaign(user: ID!, campaign: ID!): Campaign
+    removePlayerFromCampaign(user: ID!, campaign: ID!): Player
+    addNote(name: String!, text: String!): Note
+    removeNote(note: ID!): Note
+    addPlayerToNote(note: ID!, user: ID!): Note
+    removePlayerFromNote(note: ID!, user: ID!): Note
   }
 `;
 
