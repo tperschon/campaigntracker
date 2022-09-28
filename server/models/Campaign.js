@@ -11,11 +11,15 @@ const campaignSchema = new Schema({
     trim: true
   },
   admins: {
-    type: [Number]
+    type: Number
   },
   players: {
     type: [Number]
   },
+  jCode: {
+    type: String,
+    required: true
+  }
 });
 
 const Campaign = mongoose.model('Campaign', campaignSchema);

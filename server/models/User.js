@@ -20,8 +20,11 @@ const userSchema = new Schema({
     type: String,
     required: true,
     minlength: 8,
+    // validate password has at least 1 capital letter, lowercase letter, numeric character and one special from the listed subset
     validate: {
-      validator: isValidPassword,
+      validator: function(v) {
+        return /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-])$/.test(v);
+      },
       message: 'Password must have at least: 1 uppercase letter, 1 lowercase letter, 1 number, and 1 special character.'
     }
   },

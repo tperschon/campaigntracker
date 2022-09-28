@@ -15,6 +15,9 @@ const noteSchema = new Schema({
   text: {
     type: String
   },
+  campaign: {
+    type: Number
+  }
 });
 
 const Note = mongoose.model('Note', noteSchema);
