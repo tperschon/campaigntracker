@@ -23,8 +23,7 @@ function Nav() {
       return (
         <ul className="nav-list">
           <li><Link className="nav-link" to="/login">Login</Link></li>
-          {/* Links to: Sign-up/Log-in *Can be one page, realistically.*
-              Otherwise, nothing else? */}
+          <li><Link className="nav-link" to="/signup">Sign Up</Link></li>
         </ul>
       )
     }

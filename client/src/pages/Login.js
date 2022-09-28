@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
-// Link will be used in the event we make a signup page.
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { LOGIN } from '../utils/mutations';
 import Auth from '../utils/Auth';
 
@@ -30,43 +29,62 @@ function Login(props) {
     });
   };
 
-  return (
-    <div className="container my-1">
-      {/* Kinda want to make the sign-up/login one page for ease purposes */}
-      {/* Styles are currently pending CSS */}
+  // Signup function here? Or we may need another page for the signup
 
-      <h2>Login</h2>
-      <form onSubmit={handleFormSubmit}>
-        <div className="flex">
-          <label htmlFor="email">Email address:</label>
-          <input
-            placeholder="youremailhere@email.com"
-            name="email"
-            type="email"
-            id="login-email"
-            onChange={handleChange}
-          />
+  return (
+    <div className="login-page-container">
+      <div className="input-container">
+        {/* Kinda want to make the sign-up/login one page for ease purposes */}
+        {/* Styles are currently pending CSS */}
+        
+        <div className="input-block">
+          <h2>Login</h2>
+          <form className="login-form" onSubmit={handleFormSubmit}>
+            <div className="flex">
+              <div className='input-label'>
+                <label htmlFor="email">Email address:</label>
+              </div>
+              <input
+                className='input-field'
+                placeholder="youremailhere@email.com"
+                name="email"
+                type="email"
+                id="login-email"
+                onChange={handleChange}
+              />
+            </div>
+            <div className="flex">
+              <div className='input-label'>
+                <label htmlFor="password">Password:</label>
+              </div>
+              <input
+                className='input-field'
+                placeholder="********"
+                name="password"
+                type="password"
+                id="login-password"
+                onChange={handleChange}
+              />
+            </div>
+            {error ? (
+              <div>
+                <p className="error-txt">Credentials incorrect</p>
+              </div>
+            ) : null}
+            <div className="flex">
+              <button className="submit-btn" type="submit">Submit</button>
+            </div>
+          </form>
         </div>
-        <div className="flex">
-          <label htmlFor="password">Password:</label>
-          <input
-            placeholder="********"
-            name="password"
-            type="password"
-            id="login-password"
-            onChange={handleChange}
-          />
-        </div>
-        {error ? (
-          <div>
-            <p className="error-txt">Credentials incorrect</p>
-          </div>
-        ) : null}
-        <div className="flex">
-          <button type="submit">Submit</button>
-        </div>
-      </form>
-    </div> 
+      </div>
+
+      <div className='divider-div'>
+
+        <h3>OR</h3>
+        
+        <Link to="/signup" className='context-link'><h2>Go to Signup!</h2></Link>
+      </div>
+    </div>
   );
 }
 
