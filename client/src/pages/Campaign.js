@@ -10,3 +10,5 @@ const Campaign = () => {
     </div>
   );
 };
+
+export default Campaign;

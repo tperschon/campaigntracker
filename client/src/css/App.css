@@ -1,18 +1,173 @@
 /* Mobile First */
-.container {
+body {
+  display: flex;
+  flex-direction: column;
+  color: antiquewhite;
+  background-color: #282c34;
+  margin: 0;
+  position: relative;
+  min-height: 100vh;
+}
 
+.heading-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  min-width: 50%;
+  padding-left: 5px;
+}
+
+.nav-container {
+  display: flex;
+  flex-direction: row;
+  min-width: 45%;
+  max-width: 50%;
+  height: 100%;
+  justify-content: flex-end;
+}
+
+nav {
+  display: flex;
+  flex-direction: row;
+}
+
+.nav-list {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-right: 5px;
+  padding-left: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.flex-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  background-color: black;
+  padding: 0 1% 0 1%;
+}
+
+.main-heading {
+  margin: 0;
+}
+
+.main-heading-link {
+  text-decoration: none;
+  color: #6197fb
+}
+
+.nav-link {
+  text-decoration: none;
+  color: antiquewhite;
+  padding: 0 5px 0 5px;
+}
+
+.home-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+  margin-top: 8%;
+  margin-bottom: 25%;
+}
+
+.context-link {
+  text-decoration: underline;
+  color: rgb(53, 141, 255);
+  transition: .15s;
+}
+
+.flex {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: row;
+  margin: 8% 1% 0% 1%;
+}
+
+.input-block {
+  display: flex;
+  flex-direction: column;
+  margin: 1%;
+  width: 100%;
+  align-items: center;
+}
+
+.login-form {
+  width: 100%;
+}
+
+.signup-form {
+  width: 100%;
+}
+
+.input-label {
+  margin-bottom: 0.4%;
+}
+
+.input-field {
+  width: 80%;
+  height: 24px;
+  margin-bottom: 0.5%;
+  padding-left: 0.4%;
+}
+
+.submit-btn {
+  background-color: rgb(53, 141, 255);
+  color: antiquewhite;
+  margin: 2% 0% 1.5% 0%;
+  width: 81%;
+  height: 40px;
+  border: solid 1px rgba(0, 0, 0, 0);
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  font-size: 1.25em;
+  cursor: pointer;
+  transition: .15s;
+}
+
+.divider-div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 
 /* -------------------------------------------------------------------------------- */
 /* Tablet */
+@media screen and (min-width: 768px) {
 
+
+
+}
 
 
 /* -------------------------------------------------------------------------------- */
 /* Desktop */
+@media screen and (min-width: 992px) {
+
+  /* Hover elements are best suited to desktop */
+  .submit-btn:hover {
+    border: 1px solid white;
+    color: white;
+  }
+
+  .context-link:hover {
+    color: antiquewhite;
+  }
 
 
+};
 
 /* -------------------------------------------------------------------------------- */
 
