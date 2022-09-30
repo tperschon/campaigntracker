@@ -128,13 +128,12 @@ const resolvers = {
     
     removeNote: async (parent, { id }, context) => {
       const removedNote = await Note.findOneAndDelete({
-        _id: id,
-        creator: context.user._id,
+        _id: id
       });
       if (removedNote) {
         return removedNote;
       }
-      throw new UserInputError('Note does not exist')
+      throw new UserInputError('Note does not exist');
     },
   },
 };
