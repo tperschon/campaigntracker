@@ -16,8 +16,8 @@ const resolvers = {
       throw new AuthenticationError('Not logged in');
     },
     // get the campaign by the campaign.id in context
-    campaign: async (parents, {id}) => {
-        const campaign = await Campaign.findById(id);
+    campaign: async (parents, { campaignId }) => {
+        const campaign = await Campaign.findById(campaignId);
         campaign.populate({path: 'admins', model: User});
         campaign.populate({path: 'players', model: User});
         if (!campaign) {
