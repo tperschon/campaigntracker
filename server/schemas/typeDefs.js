@@ -30,6 +30,7 @@ const typeDefs = gql`
     admins: [User]
     players: [User]
     jCode: String
+    note: [Note]
   }
 
   type Character {

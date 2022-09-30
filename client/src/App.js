@@ -54,7 +54,7 @@ function App() {
               element={<Signup />}
             />
             <Route
-              path="/campaigns/:id"
+              path="/campaigns"
               element={<Campaign />}
             />
             {/* /campaigns/:id? */}

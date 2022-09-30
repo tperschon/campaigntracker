@@ -1,5 +1,6 @@
 import React from "react";
 import Auth from "../../utils/Auth";
+import Camp from "../CampaignList/index";
 import { Link } from "react-router-dom";
 
 // Nav component
@@ -16,6 +17,9 @@ function Nav() {
           {/* If logged in, links to? 
               Guessing, campaigns--or characters? */}
           <li>
+          <a className="nav-link" href="/campaigns" onClick={() => Camp.CampaignList()}>
+              Campaign
+            </a>
             <a className="nav-link" href="/" onClick={() => Auth.logout()}>
               Logout
             </a>

@@ -34,6 +34,7 @@ export const GET_USER_CAMPAIGNS = gql`
     getUserCampaigns {
       _id
       name
+      note
     }
   }`;
 
