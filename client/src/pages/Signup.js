@@ -37,7 +37,7 @@ function Signup(props) {
           <form className="signup-form" onSubmit={handleFormSubmit}>
             <div className="flex">
               <div className='input-label'>
-                <label htmlFor="username">username:</label>
+                <label htmlFor="username">Username:</label>
               </div>
               <input
                 className='input-field'
