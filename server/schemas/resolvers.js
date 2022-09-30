@@ -35,19 +35,19 @@ const resolvers = {
       .populate({path: 'campaigns', model: Campaign});
       return user.campaigns;
     },
-    notes: async (parent, args, context) => {
-      const notes = await Note.find(
-        { 'creator': context.user._id }
-      )
-      .populate({path: 'creator', model: User})
-      .populate({path: 'campaign', model: Campaign});
-      return notes
-    },
+    // notes: async (parent, args, context) => {
+    //   const notes = await Note.find(
+    //     { 'creator': context.user._id }
+    //   )
+    //   .populate({path: 'creator', model: User})
+    //   .populate({path: 'campaign', model: Campaign});
+    //   return notes
+    // },
     getCampaignNotes: async (parent, { id }, context) => {
       if (context.user) {
-        const user = await User.findById(context.user._id)
-        .populate('notes')
-        return user.notes.filter(note => note.campaign.toString() === id.toString()) 
+        const notes = await Note.find({ where: { campaign: { _id: id }}})
+        .populate({path: 'creator', model: User});
+        return notes;
       }
       throw new AuthenticationError('Not logged in')
     }
