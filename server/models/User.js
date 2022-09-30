@@ -31,6 +31,10 @@ const userSchema = new Schema({
   campaigns: [{
     type: SchemaTypes.ObjectId,
     ref: 'Campaign'
+  }],
+  notes: [{
+    type: SchemaTypes.ObjectId,
+    ref: 'Note'
   }]
 });
 // salt/hash our password before saving it to db
