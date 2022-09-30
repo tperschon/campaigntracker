@@ -18,9 +18,8 @@ const resolvers = {
     // get the campaign by the campaign.id in context
     campaign: async (parents, {id}) => {
         const campaign = await Campaign.findById(id);
-        return campaign;
         if (!campaign) {
-         Error('Campaign not found.');
+          throw new UserInputError('Campaign not found.');
         }
         return campaign;
     },
@@ -65,8 +64,7 @@ const resolvers = {
       if (!context.user) {
         console.log(`User not in context: ${context.user}`)
         throw new AuthenticationError('Invalid Token')
-      }
-      // TODO Add jCode logic
+      };
       const user = await User.findById(context.user._id);
       const newCampaign = {...args, admins: [user._id]};
       const campaign = await Campaign.create(newCampaign);
@@ -157,16 +155,6 @@ const resolvers = {
     removeNote: async (parent, { noteId }, context) => {
       const removedNote = await Note.findOneAndDelete({_id: noteId });
       return removedNote;
-    },
-    addPlayerToNote: async (parent, { noteId, userId }, context) => {
-      const note = await Note.findOne({_id: noteId});
-      const noteCanSee = note.canSee;
-      noteCanSee.push(userId)
-      const updatedNote = await Note.findOneAndUpdate(
-        {_id: noteId},
-        {canSee: noteCanSee},
-        {new: true});
-      return updatedNote;
     },
     removePlayerFromNote: async (parent, { noteId, userId }, context) => {
       const note = await Note.findOne({_id: noteId});

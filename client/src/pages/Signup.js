@@ -7,7 +7,6 @@ import Auth from '../utils/Auth';
 function Signup(props) {
   const [formState, setFormState] = useState({ email: '', password: '', userName: '' });
   const [addUser] = useMutation(ADD_USER);
-
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     const mutationResponse = await addUser({
