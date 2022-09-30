@@ -70,3 +70,10 @@ export const ADD_NOTE = gql`
       }
     }
   }`;
+
+export const REMOVE_NOTE = gql`
+  mutation RemoveNote($removeNoteId: ID!) {
+    removeNote(id: $removeNoteId) {
+      _id
+    }
+  }`;

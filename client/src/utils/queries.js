@@ -13,22 +13,24 @@ export const QUERY_USER = gql`
       }
     }
   }`;
-
+// query for a specific campaign, returns a more comprehensive campaign object that includes all the players and admins by name alone
 export const QUERY_CAMPAIGN = gql`
   query Campaign($campaignId: ID!) {
     campaign(campaignId: $campaignId) {
       _id
       name
       admins {
+        _id
         username
       }
       players {
+        _id
         username
       }
       jCode
     }
   }`;
-
+// 
 export const GET_USER_CAMPAIGNS = gql`
   query GetUserCampaigns {
     getUserCampaigns {
