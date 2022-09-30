@@ -82,9 +82,9 @@ function Signup(props) {
       </div>
       <div className='divider-div'>
 
-        <h3>Already have an account?</h3>
+        <h3 className="mb-0">Already have an account?</h3>
 
-        <Link to="/login" className='context-link'><h2>Go to login!</h2></Link>
+        <Link to="/login" className='context-link'><h2>Go to Login!</h2></Link>
       </div>
     </div>
   );
