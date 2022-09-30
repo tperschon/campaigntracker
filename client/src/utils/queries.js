@@ -37,10 +37,18 @@ export const GET_USER_CAMPAIGNS = gql`
     }
   }`;
 
-export const QUERY_NOTES = `
+// export const QUERY_NOTES = `
 
-`;
+// `;
 
 export const GET_CAMPAIGN_NOTES = gql`
-
-`;
+  query GetCampaignNotes($campaignId: ID!) {
+    getCampaignNotes(campaignId: $campaignId) {
+      _id
+      title
+      text
+      creator {
+        username
+      }
+    }
+  }`;
