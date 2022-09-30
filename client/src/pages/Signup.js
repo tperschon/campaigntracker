@@ -5,16 +5,16 @@ import { ADD_USER } from '../utils/mutations';
 import Auth from '../utils/Auth';
 
 function Signup(props) {
-  const [formState, setFormState] = useState({ email: '', password: '' });
+  const [formState, setFormState] = useState({ email: '', password: '', userName: '' });
   const [addUser] = useMutation(ADD_USER);
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     const mutationResponse = await addUser({
       variables: {
-        username: formState.username,
         email: formState.email,
         password: formState.password,
+        userName: formState.userName,
       },
     });
     const token = mutationResponse.data.addUser.token;
@@ -42,9 +42,9 @@ function Signup(props) {
               </div>
               <input
                 className='input-field'
-                placeholder="youremailhere@email.com"
-                name="username"
-                type="text"
+                placeholder="YourNameHere"
+                name="userName"
+                type="userName"
                 id="signup-username"
                 onChange={handleChange}
               />
