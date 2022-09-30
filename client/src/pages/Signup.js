@@ -5,17 +5,23 @@ import { ADD_USER } from '../utils/mutations';
 import Auth from '../utils/Auth';
 
 function Signup(props) {
-  const [formState, setFormState] = useState({ email: '', password: '', userName: '' });
-  const [addUser] = useMutation(ADD_USER);
+
+  const [formState, setFormState] = useState({ email: '', password: '' });
+  const [addUser, {loading, error}] = useMutation(ADD_USER);
+
+
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     const mutationResponse = await addUser({
       variables: {
+
+        userName: formState.username,
         email: formState.email,
         password: formState.password,
-        userName: formState.userName,
-      },
+      }
+
     });
+    console.log(mutationResponse);
     const token = mutationResponse.data.addUser.token;
     Auth.login(token);
   };
@@ -37,13 +43,15 @@ function Signup(props) {
           <form className="signup-form" onSubmit={handleFormSubmit}>
             <div className="flex">
               <div className='input-label'>
-                <label htmlFor="username">Username:</label>
+                <label htmlFor="userName">Username:</label>
               </div>
               <input
                 className='input-field'
-                placeholder="YourNameHere"
+
+                placeholder="youremailhere@email.com"
                 name="userName"
-                type="userName"
+                type="text"
+
                 id="signup-username"
                 onChange={handleChange}
               />
@@ -76,6 +84,7 @@ function Signup(props) {
             </div>
             <div className="flex">
                 <button className="submit-btn" type="submit">Submit</button>
+                {error && <p>{error.message}</p>}
             </div>
           </form>
         </div>

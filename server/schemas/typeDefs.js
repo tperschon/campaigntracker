@@ -21,6 +21,7 @@ const typeDefs = gql`
     userName: String
     email: String
     campaigns: [Campaign]
+    notes: [Note]
   }
 
   type Campaign {
@@ -45,8 +46,13 @@ const typeDefs = gql`
   type Query {
     user: User
     campaign: Campaign
-    getUserCampaigns(id: ID!): [Campaign]
-    getCampaignNotes(campaign: ID!): [Note]
+    getUserCampaigns: [Campaign]
+    getCampaignNotes(id: ID!): [Note]
+    # DO WE NEED IT?
+    note: Note
+    notes: [Note]
+    getCampaignCode(campaign: ID!): String
+
   }
 
   type Mutation {
@@ -54,7 +60,19 @@ const typeDefs = gql`
     addCampaign(name: String!): Campaign
     joinCampaign(jCode: String!): User
     login(email: String!, password: String!): Auth
+
+    addNote(title: String!, noteType: String, text: String!, campaignId: ID!): Note
+    removeNote(id: ID!): Note
+
+    # DO WE NEED IT?
+    changePassword(newPassword: String): Auth
+    addPlayerToCampaign(user: ID!, campaign: ID!): Campaign
+    removePlayerFromCampaign(user: ID!, campaign: ID!): User
+    addPlayerToNote(note: ID!, user: ID!): Note
+    removePlayerFromNote(note: ID!, user: ID!): Note
+
     addNote(title: String!, noteType: String, text: String!, campaign: ID!): Note
+
   }
 `;
 
