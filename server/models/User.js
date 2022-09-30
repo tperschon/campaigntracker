@@ -6,7 +6,7 @@ const bcrypt = require('bcrypt');
 // set up our userSchema
 const userSchema = new Schema({
   // the alias a User goes by on the site
-  username: {
+  userName: {
     type: String,
     required: true,
     trim: true,
@@ -27,6 +27,10 @@ const userSchema = new Schema({
   campaigns: [{
     type: SchemaTypes.ObjectId,
     ref: 'Campaign'
+  }],
+  notes: [{
+    type: SchemaTypes.ObjectId,
+    ref: 'Note'
   }]
 });
 // salt/hash our password before saving it to db

@@ -47,7 +47,7 @@ nav {
   align-items: center;
   justify-content: space-between;
   background-color: black;
-  padding: 0 1% 0 1%;
+  padding: 0.6% 1% 1.5% 1%;
 }
 
 .main-heading {
@@ -91,6 +91,7 @@ nav {
   display: flex;
   flex-direction: row;
   margin: 8% 1% 0% 1%;
+  justify-content: center
 }
 
 .input-block {
@@ -142,12 +143,21 @@ nav {
   align-items: center;
 }
 
+h3 {
+  margin-block-end: 0;
+}
 
 /* -------------------------------------------------------------------------------- */
 /* Tablet */
 @media screen and (min-width: 768px) {
 
+  .input-block {
+    width: 70%;
+  }
 
+  .flex-header {
+    padding: 1% 1% 1.35% 1%;
+  }
 
 }
 
@@ -164,6 +174,14 @@ nav {
 
   .context-link:hover {
     color: antiquewhite;
+  }
+
+  .input-block {
+    width: 60%;
+  }
+
+  .flex-header {
+    padding: 1.2% 1% 1.35% 1%;
   }
 
 

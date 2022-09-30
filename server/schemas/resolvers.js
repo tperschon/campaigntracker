@@ -11,7 +11,7 @@ const resolvers = {
     // get the user by the user.id in context
     user: async (parent, args, context) => {
       if (context.user) {
-        return User.findById(context.user._id);
+        return await User.findById(context.user._id).populate({ path: 'campaigns', model: Campaign });
       }
       throw new AuthenticationError('Not logged in');
     },
@@ -21,18 +21,31 @@ const resolvers = {
         campaign.populate({path: 'admins', model: User});
         campaign.populate({path: 'players', model: User});
         if (!campaign) {
-          throw new UserInputError('Campaign not found.');
+
+            throw new UserInputError('Campaign not found.');
         }
         return campaign;
     },
-    getUserCampaigns: async (parent, { id }, context) => {
-      const user = await User.findById(id);
-      await user.populate({path: 'campaigns', model: Campaign});
+    getUserCampaigns: async (parent, args, context) => {
+      const user = await User.findById(context.user._id)
+      .populate({path: 'campaigns', model: Campaign});
       return user.campaigns;
     },
-    getCampaignNotes: async (parent, { campaign }, context) => {
-      const notes = await Note.find({ campaign: { _id: campaign }});
-      return notes;
+    notes: async (parent, args, context) => {
+      const notes = await Note.find(
+        { 'creator': context.user._id }
+      )
+      .populate({path: 'creator', model: User})
+      .populate({path: 'campaign', model: Campaign});
+      return notes
+    },
+    getCampaignNotes: async (parent, { id }, context) => {
+      if (context.user) {
+        const user = await User.findById(context.user._id)
+        .populate('notes')
+        return user.notes.filter(note => note.campaign.toString() === id.toString()) 
+      }
+      throw new AuthenticationError('Not logged in')
     }
   },
 
@@ -53,8 +66,8 @@ const resolvers = {
       };
       const user = await User.findById(context.user._id);
       const newCampaign = {...args, admins: [user._id]};
-      const campaign = await Campaign.create(newCampaign);
-      await campaign.populate('admins');
+      const campaign = await Campaign.create(newCampaign)
+      .populate('admins');
       return campaign;
     },
     login: async (parent, { email, password }) => {
@@ -70,7 +83,6 @@ const resolvers = {
       return { token, user };
     },
     joinCampaign: async (parent, { jCode }, context) => {
-      console.log(jCode);
       if (!context.user) {
         console.log(`no user in context ${context.user}`);
         throw new AuthenticationError('Invalid Token');
@@ -92,7 +104,7 @@ const resolvers = {
       await user.populate({path: 'campaigns', model: Campaign, populate: [{path: 'admins', model: User}]});
       return { user, campaign };
     },
-    addNote: async (parent, { title, text, campaign }, context) => {
+    addNote: async (parent, { title, text, campaignId }, context) => {
       if (!context.user) {
         console.log('Invalid Token');
         throw new AuthenticationError('Invalid Token');
@@ -101,12 +113,44 @@ const resolvers = {
         title: title,
         text: text,
         creator: context.user._id,
-        campaign: campaign
+        campaign: campaignId
       });
+
       await note.populate({path: 'campaign', model: Campaign});
-      await note.populate({path: 'creator', model: User})
+      await note.populate({path: 'creator', model: User});
       return note;
     },
+    
+    removeNote: async (parent, { id }, context) => {
+      const removedNote = await Note.findOneAndDelete({
+        _id: id,
+        creator: context.user._id,
+      });
+      if (removedNote) {
+        return removedNote;
+      }
+      throw new UserInputError('Note does not exist')
+    },
+    addPlayerToNote: async (parent, { noteId, userId }, context) => {
+      const note = await Note.findOne({_id: noteId});
+      const noteCanSee = note.canSee;
+      noteCanSee.push(userId)
+      const updatedNote = await Note.findOneAndUpdate(
+        {_id: noteId},
+        {canSee: noteCanSee},
+        {new: true});
+      return updatedNote;
+    },
+    // removePlayerFromNote: async (parent, { noteId, userId }, context) => {
+    //   const note = await Note.findOne({_id: noteId});
+    //   const noteCanSee = note.canSee;
+    //   noteCanSee.filter(player => player != userId);
+    //   const updatedNote = await Note.findOneAndUpdate(
+    //     {_id: noteId},
+    //     {canSee: noteCanSee},
+    //     {new: true});
+    //   return updatedNote;
+    // }
   },
 };
 

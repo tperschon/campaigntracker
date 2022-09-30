@@ -5,17 +5,23 @@ import { ADD_USER } from '../utils/mutations';
 import Auth from '../utils/Auth';
 
 function Signup(props) {
+
   const [formState, setFormState] = useState({ email: '', password: '' });
-  const [addUser] = useMutation(ADD_USER);
+  const [addUser, {loading, error}] = useMutation(ADD_USER);
+
+
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     const mutationResponse = await addUser({
       variables: {
-        username: formState.username,
+
+        userName: formState.username,
         email: formState.email,
         password: formState.password,
-      },
+      }
+
     });
+    console.log(mutationResponse);
     const token = mutationResponse.data.addUser.token;
     Auth.login(token);
   };
@@ -37,13 +43,15 @@ function Signup(props) {
           <form className="signup-form" onSubmit={handleFormSubmit}>
             <div className="flex">
               <div className='input-label'>
-                <label htmlFor="username">username:</label>
+                <label htmlFor="userName">Username:</label>
               </div>
               <input
                 className='input-field'
+
                 placeholder="youremailhere@email.com"
-                name="username"
+                name="userName"
                 type="text"
+
                 id="signup-username"
                 onChange={handleChange}
               />
@@ -76,15 +84,16 @@ function Signup(props) {
             </div>
             <div className="flex">
                 <button className="submit-btn" type="submit">Submit</button>
+                {error && <p>{error.message}</p>}
             </div>
           </form>
         </div>
       </div>
       <div className='divider-div'>
 
-        <h3>Already have an account?</h3>
+        <h3 className="mb-0">Already have an account?</h3>
 
-        <Link to="/login" className='context-link'><h2>Go to login!</h2></Link>
+        <Link to="/login" className='context-link'><h2>Go to Login!</h2></Link>
       </div>
     </div>
   );
