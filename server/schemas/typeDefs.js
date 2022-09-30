@@ -52,6 +52,7 @@ const typeDefs = gql`
     user: User
     campaign(campaignId: ID!): Campaign
     getUserCampaigns(id: ID!): [Campaign]
+    notes: [Note]
     getCampaignNotes(campaignId: ID!): [Note]
   }
 

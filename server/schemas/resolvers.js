@@ -131,26 +131,6 @@ const resolvers = {
       }
       throw new UserInputError('Note does not exist')
     },
-    addPlayerToNote: async (parent, { noteId, userId }, context) => {
-      const note = await Note.findOne({_id: noteId});
-      const noteCanSee = note.canSee;
-      noteCanSee.push(userId)
-      const updatedNote = await Note.findOneAndUpdate(
-        {_id: noteId},
-        {canSee: noteCanSee},
-        {new: true});
-      return updatedNote;
-    },
-    // removePlayerFromNote: async (parent, { noteId, userId }, context) => {
-    //   const note = await Note.findOne({_id: noteId});
-    //   const noteCanSee = note.canSee;
-    //   noteCanSee.filter(player => player != userId);
-    //   const updatedNote = await Note.findOneAndUpdate(
-    //     {_id: noteId},
-    //     {canSee: noteCanSee},
-    //     {new: true});
-    //   return updatedNote;
-    // }
   },
 };
 
