@@ -6,9 +6,7 @@ import Auth from '../utils/Auth';
 
 function Signup(props) {
   const [formState, setFormState] = useState({ email: '', password: '' });
-  console.log('1');
   const [addUser] = useMutation(ADD_USER);
-
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     const mutationResponse = await addUser({
@@ -39,7 +37,7 @@ function Signup(props) {
           <form className="signup-form" onSubmit={handleFormSubmit}>
             <div className="flex">
               <div className='input-label'>
-                <label htmlFor="username">Username:</label>
+                <label htmlFor="username">username:</label>
               </div>
               <input
                 className='input-field'

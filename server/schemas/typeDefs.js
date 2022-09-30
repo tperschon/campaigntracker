@@ -18,7 +18,7 @@ const typeDefs = gql`
 
   type User {
     _id: ID
-    userName: String
+    username: String
     email: String
     campaigns: [Campaign]
   }
@@ -54,7 +54,7 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    addUser(userName: String!, email: String!, password: String!): Auth
+    addUser(username: String!, email: String!, password: String!): Auth
     addCampaign(name: String!): Campaign
     joinCampaign(jCode: String!): User
     login(email: String!, password: String!): Auth
