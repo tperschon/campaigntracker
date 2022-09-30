@@ -6,7 +6,7 @@ const bcrypt = require('bcrypt');
 // set up our userSchema
 const userSchema = new Schema({
   // the alias a User goes by on the site
-  userName: {
+  username: {
     type: String,
     required: true,
     trim: true,

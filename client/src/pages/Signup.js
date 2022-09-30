@@ -15,7 +15,7 @@ function Signup(props) {
     const mutationResponse = await addUser({
       variables: {
 
-        userName: formState.username,
+        username: formState.username,
         email: formState.email,
         password: formState.password,
       }
@@ -43,13 +43,13 @@ function Signup(props) {
           <form className="signup-form" onSubmit={handleFormSubmit}>
             <div className="flex">
               <div className='input-label'>
-                <label htmlFor="userName">Username:</label>
+                <label htmlFor="username">Username:</label>
               </div>
               <input
                 className='input-field'
 
                 placeholder="youremailhere@email.com"
-                name="userName"
+                name="username"
                 type="text"
 
                 id="signup-username"

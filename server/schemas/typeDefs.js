@@ -18,7 +18,7 @@ const typeDefs = gql`
 
   type User {
     _id: ID
-    userName: String
+    username: String
     email: String
     campaigns: [Campaign]
     notes: [Note]
@@ -43,36 +43,26 @@ const typeDefs = gql`
     user: User
   }
 
-  type Query {
+  type UserCampaign {
     user: User
     campaign: Campaign
-    getUserCampaigns: [Campaign]
-    getCampaignNotes(id: ID!): [Note]
-    # DO WE NEED IT?
-    note: Note
-    notes: [Note]
-    getCampaignCode(campaign: ID!): String
+  }
 
+  type Query {
+    user: User
+    campaign(campaignId: ID!): Campaign
+    getUserCampaigns: [Campaign]
+    notes: [Note]
+    getCampaignNotes(campaignId: ID!): [Note]
   }
 
   type Mutation {
-    addUser(userName: String!, email: String!, password: String!): Auth
+    addUser(username: String!, email: String!, password: String!): Auth
     addCampaign(name: String!): Campaign
-    joinCampaign(jCode: String!): User
+    joinCampaign(jCode: String!): UserCampaign
     login(email: String!, password: String!): Auth
-
     addNote(title: String!, noteType: String, text: String!, campaignId: ID!): Note
     removeNote(id: ID!): Note
-
-    # DO WE NEED IT?
-    changePassword(newPassword: String): Auth
-    addPlayerToCampaign(user: ID!, campaign: ID!): Campaign
-    removePlayerFromCampaign(user: ID!, campaign: ID!): User
-    addPlayerToNote(note: ID!, user: ID!): Note
-    removePlayerFromNote(note: ID!, user: ID!): Note
-
-    addNote(title: String!, noteType: String, text: String!, campaign: ID!): Note
-
   }
 `;
 
