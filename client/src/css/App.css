@@ -9,32 +9,49 @@ body {
   min-height: 100vh;
 }
 
+.heading-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  min-width: 50%;
+  padding-left: 5px;
+}
+
+.nav-container {
+  display: flex;
+  flex-direction: row;
+  min-width: 45%;
+  max-width: 50%;
+  height: 100%;
+  justify-content: flex-end;
+}
+
 nav {
   display: flex;
-  flex-direction: column;
-  height: 1%;
-  padding-bottom: .75rem;
+  flex-direction: row;
 }
 
 .nav-list {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  padding: 0;
-  margin-top: 2%;
-  margin-bottom: 2%;
+  padding-right: 5px;
+  padding-left: 0;
+  margin: 0;
+  list-style: none;
 }
 
 .flex-header {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
+  justify-content: space-between;
   background-color: black;
   padding: 0 1% 0 1%;
 }
 
 .main-heading {
-  margin: 5px 0 5px 0;
+  margin: 0;
 }
 
 .main-heading-link {
@@ -45,10 +62,7 @@ nav {
 .nav-link {
   text-decoration: none;
   color: antiquewhite;
-}
-
-.nav-list {
-  list-style: none;
+  padding: 0 5px 0 5px;
 }
 
 .home-container {
@@ -56,13 +70,14 @@ nav {
   flex-direction: row;
   justify-content: center;
   width: 100%;
-  margin-top: 25%;
+  margin-top: 8%;
   margin-bottom: 25%;
 }
 
 .context-link {
   text-decoration: underline;
-  color: rgb(0, 97, 224)
+  color: rgb(53, 141, 255);
+  transition: .15s;
 }
 
 .flex {
@@ -75,7 +90,7 @@ nav {
 .input-container {
   display: flex;
   flex-direction: row;
-  margin: 8% 1% 2% 1%;
+  margin: 8% 1% 0% 1%;
 }
 
 .input-block {
@@ -95,27 +110,30 @@ nav {
 }
 
 .input-label {
-  margin-bottom: 1%;
+  margin-bottom: 0.4%;
 }
 
 .input-field {
   width: 80%;
   height: 24px;
-  margin-bottom: 1%;
+  margin-bottom: 0.5%;
+  padding-left: 0.4%;
 }
 
 .submit-btn {
-  background-color: #153c85;
+  background-color: rgb(53, 141, 255);
   color: antiquewhite;
-  margin: .2% 1% 1.5% 1%;
-  width: 82%;
-  height: 50px;
+  margin: 2% 0% 1.5% 0%;
+  width: 81%;
+  height: 40px;
   border: solid 1px rgba(0, 0, 0, 0);
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
   font-size: 1.25em;
+  cursor: pointer;
+  transition: .15s;
 }
 
 .divider-div {
@@ -127,13 +145,29 @@ nav {
 
 /* -------------------------------------------------------------------------------- */
 /* Tablet */
+@media screen and (min-width: 768px) {
 
+
+
+}
 
 
 /* -------------------------------------------------------------------------------- */
 /* Desktop */
+@media screen and (min-width: 992px) {
+
+  /* Hover elements are best suited to desktop */
+  .submit-btn:hover {
+    border: 1px solid white;
+    color: white;
+  }
+
+  .context-link:hover {
+    color: antiquewhite;
+  }
 
 
+};
 
 /* -------------------------------------------------------------------------------- */
 

@@ -23,7 +23,7 @@ function Nav() {
       return (
         <ul className="nav-list">
           <li><Link className="nav-link" to="/login">Login</Link></li>
-          <li><Link className="nav-link" to="/signup">Sign Up</Link></li>
+          <li><Link className="nav-link" to="/signup">Sign-Up</Link></li>
         </ul>
       )
     }
@@ -32,15 +32,18 @@ function Nav() {
   return (
     // Header contains the nav element.
     <header className="flex-header">
-      <h1 className="main-heading">
-        <Link className="main-heading-link" to="/">
-          Campaign Tracker
-        </Link>
-      </h1>
-
-      <nav>
-        {showNavigation()}
-      </nav>
+      <div className="heading-container">
+        <h1 className="main-heading">
+          <Link className="main-heading-link" to="/">
+            Campaign Tracker
+          </Link>
+        </h1>
+      </div>
+      <div className="nav-container">
+        <nav>
+          {showNavigation()}
+        </nav>
+      </div>
     </header>
   );
 }
