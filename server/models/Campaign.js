@@ -13,10 +13,10 @@ const campaignSchema = new Schema({
     trim: true
   },
   // an array of Users who have administrative access, these people can see the jCode and create/see Notes for a Campaign
-  admins: {
+  admins: [{
     type: SchemaTypes.ObjectId,
     ref: 'User'
-  },
+  }],
   // an array of Users who are participating in the campaign, they get added by utilizing the jCode to be 'invited', they can see Notes for a Campaign
   players: [{
     type: SchemaTypes.ObjectId,

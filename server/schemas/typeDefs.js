@@ -26,7 +26,7 @@ const typeDefs = gql`
   type Campaign {
     _id: ID
     name: String
-    admins: User
+    admins: [User]
     players: [User]
     jCode: String
   }
