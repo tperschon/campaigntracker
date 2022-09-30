@@ -19,7 +19,8 @@ const resolvers = {
     campaign: async (parents, {id}) => {
         const campaign = await Campaign.findById(id);
         if (!campaign) {
-         throw new UserInputError('Campaign not found.');
+
+            throw new UserInputError('Campaign not found.');
         }
         return campaign;
     },
@@ -72,56 +73,25 @@ const resolvers = {
       if (!context.user) {
         console.log(`User not in context: ${context.user}`)
         throw new AuthenticationError('Invalid Token')
-      }
-      // TODO Add jCode logic
+      };
       const user = await User.findById(context.user._id);
       const newCampaign = {...args, admins: [user._id]};
       const campaign = await Campaign.create(newCampaign)
       .populate('admins');
       return campaign;
     },
-    // TODO: Nice to have
-    // changes a user's password by finding the user from context and updating it with the newPassword argument
-    // changePassword: async (parent, { newPassword }, context) => {
-    //   if (context.user) {
-    //     // Does this work? Password needs to be hashed
-    //     const user = await User.findOneAndUpdate({_id: user.id},{password: newPassword},{new: true});
-    //     return user;
-    //   }
-    //   throw new AuthenticationError('Not logged in');
-    //   // need code to allow authenticated user to change password
-    // },
-    // log in a user via finding the associated user account given the email, and checking the hash of the given password to the stored hashed password
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
-
       if (!user) {
         throw new AuthenticationError('Incorrect credentials');
-      }
-
+      };
       const correctPw = await user.isCorrectPassword(password);
-
       if (!correctPw) {
         throw new AuthenticationError('Incorrect credentials');
-      }
-
+      };
       const token = signToken(user);
-
       return { token, user };
     },
-    // TODO: Players should join a campain this is less work for now
-    // addPlayerToCampaign: async (parent, { userId, campaignId }, context) => {
-    //   // get campaign ID from context if available and not specified
-    //   const campaign_id = campaignId || context.campaign._id;
-    //   const campaign = await Campaign.findOne({_id: campaign_id});
-    //   const campaignPlayers = campaign.players;
-    //   campaignPlayers.push(userId);
-    //   const updatedCampaign = await Campaign.findOneAndUpdate(
-    //     {_id: campaign_id},
-    //     {players: campaignPlayers},
-    //     {new: true});
-    //   return updatedCampaign;
-    // },
     joinCampaign: async (parent, { jCode }, context) => {
       console.log(jCode);
       if (!context.user) {
@@ -145,22 +115,23 @@ const resolvers = {
       await user.populate({path: 'campaigns', model: Campaign, populate: [{path: 'admins', model: User}]});
       return user;
     },
-    addNote: async (parent, { title, noteType, text, campaignId }, context) => {
+    addNote: async (parent, { title, text, campaign }, context) => {
       if (!context.user) {
         console.log('Invalid Token');
         throw new AuthenticationError('Invalid Token');
       }
       const note = await Note.create({
         title: title,
-        noteType: noteType,
         text: text,
         creator: context.user._id,
         campaign: campaignId
       })
+
       await note.populate({path: 'campaign', model: Campaign});
       await note.populate({path: 'creator', model: User});
       return note;
     },
+    
     removeNote: async (parent, { id }, context) => {
       const removedNote = await Note.findOneAndDelete({
         _id: id,

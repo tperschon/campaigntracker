@@ -52,6 +52,7 @@ const typeDefs = gql`
     note: Note
     notes: [Note]
     getCampaignCode(campaign: ID!): String
+
   }
 
   type Mutation {
@@ -59,6 +60,7 @@ const typeDefs = gql`
     addCampaign(name: String!): Campaign
     joinCampaign(jCode: String!): User
     login(email: String!, password: String!): Auth
+
     addNote(title: String!, noteType: String, text: String!, campaignId: ID!): Note
     removeNote(id: ID!): Note
 
@@ -68,6 +70,9 @@ const typeDefs = gql`
     removePlayerFromCampaign(user: ID!, campaign: ID!): User
     addPlayerToNote(note: ID!, user: ID!): Note
     removePlayerFromNote(note: ID!, user: ID!): Note
+
+    addNote(title: String!, noteType: String, text: String!, campaign: ID!): Note
+
   }
 `;
 
