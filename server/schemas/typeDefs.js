@@ -1,28 +1,40 @@
 const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
+  enum NoteType {
+    PLAYER
+    PLACE
+    ITEM
+  }
 
   type Note {
     _id: ID
-    name: String
-    canSee: [Int]
+    title: String
+    noteType: NoteType
     text: String
-    campaign: Int
+    creator: User
+    campaign: Campaign
   }
 
   type User {
     _id: ID
     userName: String
     email: String
-    campaigns: [Int]
+    campaigns: [Campaign]
   }
 
   type Campaign {
     _id: ID
     name: String
-    admins: User
+    admins: [User]
     players: [User]
     jCode: String
+  }
+
+  type Character {
+    _id: ID
+    name: String
+    campaign: Campaign
   }
 
   type Auth {
@@ -33,19 +45,25 @@ const typeDefs = gql`
   type Query {
     user: User
     campaign: Campaign
-    note(_id: noteId): Note
-    getUserCampaigns(user: ID!): [Campaign]
+    getUserCampaigns(id: ID!): [Campaign]
+
+    # DO WE NEED IT?
+    note: Note
     notes: [Note]
     getCampaignCode(campaign: ID!): String
   }
 
   type Mutation {
-    addUser(firstName: String!, lastName: String!, email: String!, password: String!): Auth
-    changePassword(newPassword: String): Auth
+    addUser(userName: String!, email: String!, password: String!): Auth
+    addCampaign(name: String!): Campaign
+    joinCampaign(jCode: String!): User
     login(email: String!, password: String!): Auth
+    addNote(title: String!, noteType: String, text: String!, campaign: ID!): Note
+
+    # DO WE NEED IT?
+    changePassword(newPassword: String): Auth
     addPlayerToCampaign(user: ID!, campaign: ID!): Campaign
-    removePlayerFromCampaign(user: ID!, campaign: ID!): Player
-    addNote(name: String!, text: String!): Note
+    removePlayerFromCampaign(user: ID!, campaign: ID!): User
     removeNote(note: ID!): Note
     addPlayerToNote(note: ID!, user: ID!): Note
     removePlayerFromNote(note: ID!, user: ID!): Note

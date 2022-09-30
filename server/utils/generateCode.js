@@ -1,16 +1,14 @@
-const uuid = require('uuid');
-const { Campaign }= require('../models/');
+const uuid = require("uuid");
 
+const generateCode = () => {
+  var text = "";
+  var possible =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
-const generateCode = async () => {
-    const id = uuid.v4().slice(0, 6);
-    const camp = await Campaign.find({});
-    const codes = camp.filter(input => input.code === id);
-    if(codes.length > 0) {
-        return generateCode();
-    } else {
-        return id;
-    };
+  for (var i = 0; i < 6; i++)
+    text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+  return text;
 };
 
 module.exports = generateCode;
