@@ -62,7 +62,6 @@ const typeDefs = gql`
 
     # DO WE NEED IT?
     changePassword(newPassword: String): Auth
-    addPlayerToCampaign(user: ID!, campaign: ID!): Campaign
     removePlayerFromCampaign(user: ID!, campaign: ID!): User
     removeNote(note: ID!): Note
     addPlayerToNote(note: ID!, user: ID!): Note
