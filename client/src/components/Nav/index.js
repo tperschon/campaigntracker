@@ -13,11 +13,15 @@ function Nav() {
       return (
         // CSS classes are currently placeholder
         <ul className="nav-list">
-          <li>Campaigns</li>
           {/* If logged in, links to? 
               Guessing, campaigns--or characters? */}
+          <li>
+            <a className="nav-link" href="/" onClick={() => Auth.logout()}>
+              Logout
+            </a>
+          </li>
         </ul>
-      )
+      );
     } else {
       // if NOT logged in
       return (
