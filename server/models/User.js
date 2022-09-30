@@ -5,28 +5,24 @@ const { Schema, SchemaTypes } = mongoose;
 const bcrypt = require('bcrypt');
 // set up our userSchema
 const userSchema = new Schema({
+  // the alias a User goes by on the site
   username: {
     type: String,
     required: true,
     trim: true,
     unique: true
   },
+  // the email address a user signed up with
   email: {
     type: String,
     required: true,
     unique: true
   },
+  // the password used to login to the User account, should be stored hashed via a .pre below
   password: {
     type: String,
     required: true,
     minlength: 8,
-    // validate password has at least 1 capital letter, lowercase letter, numeric character and one special from the listed subset
-    // validate: {
-    //   validator: function(v) {
-    //     return /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-])$/.test(v);
-    //   },
-    //   message: 'Password must have at least: 1 uppercase letter, 1 lowercase letter, 1 number, and 1 special character.'
-    // }
   },
   campaigns: [{
     type: SchemaTypes.ObjectId,
