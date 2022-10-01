@@ -223,12 +223,35 @@ h3 {
   text-decoration: none;
 }
 
-/* .campaign {
+.noteform .submit-note {
+  background-color: rgb(53, 141, 255);
+  color: antiquewhite;
+  margin: 2% 0% 1.5% 0%;
+  width: 50%;
+  height: 40px;
+  border: solid 1px rgba(0, 0, 0, 0);
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  font-size: 1.25em;
+  cursor: pointer;
+  transition: .15s;
+}
+
+.noteform input {
+  width:50%;
+  text-align: center;
+  font-size: large;
+
+}
+.campaign {
   display: flex;
   flex-direction: column;
   text-align: center;
 }
 
+/* 
 .player-container ul{
   background-color: antiquewhite;
   color:#282c34;
