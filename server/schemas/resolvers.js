@@ -88,13 +88,17 @@ const resolvers = {
       return { token, user };
     },
     joinCampaign: async (parent, { jCode }, context) => {
-      const campaign = await Campaign.find({ where: { jCode: jCode }});
+      const campaign = await Campaign.findOne({ where: { jCode: jCode }});
       const user = await User.findByIdAndUpdate(
-        { _id: context.user._ud},
-        { "$push": { campaigns: campaign }}
+        { _id: context.user._id },
+        { "$push": { campaigns: campaign._id }}
       );
-      await campaign.updateOne({players: user});
-      return { user, campaign};
+      const updatedCampaign = await Campaign.findByIdAndUpdate(
+        { _id: campaign._id },
+        { "$push": { players: user._id }}
+      );
+
+      return { user, campaign };
     },
     // joinCampaign: async (parent, { jCode }, context) => {
     //   if (!context.user) {
@@ -119,6 +123,7 @@ const resolvers = {
     //   return { user, campaign };
     // },
     addNote: async (parent, { title, text, campaignId }, context) => {
+      console.log("run")
       if (!context.user) {
         console.log('Invalid Token');
         throw new AuthenticationError('Invalid Token');

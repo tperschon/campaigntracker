@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function CampaignCard(props, key) {
+function CampaignCard(props) {
   const { campaign } = props;
   return (
   <div>
