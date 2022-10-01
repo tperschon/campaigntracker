@@ -29,12 +29,12 @@ const Dashboard = () => {
     <div className='container'>
       <div className="join-create-container">
         
-        <div className="create-container">
-          <a className='create-redirect' href='/create'>Create A New Campaign</a>
+        <div className="redirect-container ">
+          <a className='redirect' href='/create'>Create A New Campaign</a>
         </div>
 
-        <div className="join-container">
-          <a className='create-redirect' href='/join'>Join A Campaign</a>
+        <div className="redirect-container">
+          <a className='redirect' href='/join'>Join A Campaign</a>
         </div>
       </div>
        <CampaignCard campaign={data}/>
