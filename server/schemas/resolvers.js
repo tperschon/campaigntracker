@@ -73,6 +73,9 @@ const resolvers = {
       const user = await User.findById(context.user._id);
       const newCampaign = {...args, admins: [user._id]};
       const campaign = await Campaign.create(newCampaign);
+      await User.findByIdAndUpdate(
+        { _id: context.user._id},
+        { "$push": { campaigns: campaign }});
       await campaign.populate({path:'admins', model: User});
       console.log(campaign);
       return campaign;
