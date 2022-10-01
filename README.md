@@ -30,6 +30,6 @@ Jonathan Sugihara: [jon.sugihara@gmail.com](mailto:jon.sugihara@gmail.com) and [
 
 Colton Higley: [cman_hig@hotmail.com](mailto:cman_hig@hotmail.com) and [chigley22](https://github.com/chigley22) on GitHub
 
-Isaac Harris: [IsaacHphotography@gmail.com](IsaacHphotography@gmail.com) and [Hypnotoad0010](https://github.com/Hypnotoad0010) on GitHub
+Isaac Harris: [IsaacHphotography@gmail.com](mailTo:IsaacHphotography@gmail.com) and [Hypnotoad0010](https://github.com/Hypnotoad0010) on GitHub
 
-Brinton Cole: [brintoncole@gmail.com](brintoncole@gmail.com) and [brinton0739](https://github.com/brinton0739) on GitHub
+Brinton Cole: [brintoncole@gmail.com](mailTo:brintoncole@gmail.com) and [brinton0739](https://github.com/brinton0739) on GitHub
