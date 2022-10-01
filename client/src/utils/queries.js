@@ -50,8 +50,5 @@ export const GET_CAMPAIGN_NOTES = gql`
       _id
       title
       text
-      creator {
-        username
-      }
     }
   }`;

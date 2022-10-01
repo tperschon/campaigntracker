@@ -10,7 +10,7 @@ import PlayerCard from '../components/PlayerCard';
 
 const Campaign = (props) => {
   // get current user id
-  const { data: { username, _id: id }} = Auth.getProfile();
+  const { data: { username, _id: id } } = Auth.getProfile();
   // get campaign's id from params
   const { id: campaignId } = useParams();
   // start off with no admin stuff
@@ -23,8 +23,8 @@ const Campaign = (props) => {
   const { loading: campaignLoading, error: campaignError, data: campaignData } = useQuery(QUERY_CAMPAIGN, { variables: { campaignId: campaignId } });
   const { loading: notesLoading, error: notesError, data: notesData } = useQuery(GET_CAMPAIGN_NOTES, { variables: { campaignId: campaignId } });
   // once we're done loading campaign data, check if current user is an admin of campaign and if they are, set isAdmin to true
-  if(!campaignLoading) {
-    if(campaignData.campaign.admins.map(admin => admin._id).includes(id)) isAdmin = true;
+  if (!campaignLoading) {
+    if (campaignData.campaign.admins.map(admin => admin._id).includes(id)) isAdmin = true;
   };
   // keeps forms updated
   const handleChange = (event) => {
@@ -54,7 +54,6 @@ const Campaign = (props) => {
     // Stand-in CSS
     <div className="campaign container">
       <div className="players container">
-        
         <h2>Players Participating</h2>
         <h4>
           {campaignLoading ? ("Players loading") : campaignData.campaign.players.map((player, i) => <PlayerCard username={player.username} key={i} index={i} />)}
@@ -63,29 +62,29 @@ const Campaign = (props) => {
       <div className="notes container">
         <h2>Notes</h2>
         <ul>
-          {(notesLoading) ? ("Notes Loading") : notesData.getCampaignNotes.map((note, i) => <NoteCard title={note.title} text={note.text} _id={note._id} key={i} isAdmin={isAdmin}/>)}
+          {(notesLoading) ? ("Notes Loading") : notesData.getCampaignNotes.map((note, i) => <NoteCard title={note.title} text={note.text} _id={note._id} key={i} isAdmin={isAdmin} />)}
         </ul>
-        {isAdmin ?(
-        <div>
-          <form className="noteform" onSubmit={handleFormSubmit}>
-            <input
-              type="text"
-              name="title"
-              placeholder="Title"
-              onChange={handleChange}
-            /><br></br>
-            <input
-              type="text"
-              name="text"
-              placeholder="Text"
-              onChange={handleChange}
-            /><br></br>
-            <input
-              type="submit"
-              value="Create Note"
-            />
-          </form>
-        </div>):('')}
+        {isAdmin ? (
+          <div>
+            <form className="noteform" onSubmit={handleFormSubmit}>
+              <input
+                type="text"
+                name="title"
+                placeholder="Title"
+                onChange={handleChange}
+              /><br></br>
+              <input
+                type="text"
+                name="text"
+                placeholder="Text"
+                onChange={handleChange}
+              /><br></br>
+              <input
+                type="submit"
+                value="Create Note"
+              />
+            </form>
+          </div>) : ('')}
       </div>
     </div>
   );
