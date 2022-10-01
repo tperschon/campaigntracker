@@ -12,8 +12,9 @@ import CampaignCard from "../components/CampaignCard/index"
 
 //add join campaign. add jcode to add user
 
-const DashboardPage = () => {
+const Dashboard = () => {
   const { data: { username, _id: id }} = Auth.getProfile();
+
   const {loading, error, data} = useQuery(GET_USER_CAMPAIGNS, {variables: {userId: id}});
 
   if (loading) {
@@ -23,7 +24,23 @@ const DashboardPage = () => {
   if (error) {
     console.error(error);
   }
-  return data.getUserCampaigns.map((c, i)=> <CampaignCard campaign={c} key={i}/>)
+  console.log(data)
+  return (
+    <div className='container'>
+      <div className="join-create-container">
+        
+        <div className="redirect-container ">
+          <a className='redirect' href='/create'>Create A New Campaign</a>
+        </div>
+
+        <div className="redirect-container">
+          <a className='redirect' href='/join'>Join A Campaign</a>
+        </div>
+      </div>
+      {data.getUserCampaigns.map((c, i)=> <CampaignCard campaign={c} key={i}/>)}
+    </div>
+  )
+}
   
   
 
@@ -54,7 +71,7 @@ const DashboardPage = () => {
   //   }   
   // </>
   // )
-};
 
 
-export default DashboardPage;
+
+export default Dashboard;

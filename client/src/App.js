@@ -16,6 +16,7 @@ import Campaign from './pages/Campaign';
 import Nav from './components/Nav';
 import Dashboard from './pages/Dashboard';
 import Create from './pages/Create';
+import Join from './pages/Join';
 
 
 const httpLink = createHttpLink({
@@ -67,6 +68,10 @@ function App() {
             <Route
               path="/create"
               element={<Create />}
+            />
+            <Route
+              path="/join"
+              element={<Join />}
             />
             
             {/* /campaigns/:id? */}

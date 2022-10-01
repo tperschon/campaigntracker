@@ -153,6 +153,31 @@ h3 {
   margin-block-end: 0;
 }
 
+.join-create-container {
+  display: flex;
+  margin: 10px;
+  width: auto;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.redirect-container {
+  padding: 15px;
+  align-items: center;
+}
+
+.redirect {
+  border:black;
+  background-color: rgb(53, 141, 255);
+  padding: 10px;
+  text-decoration: none;
+  border-radius: 8px;
+  color: antiquewhite;
+  align-items: center;
+
+}
+
+
 /* -------------------------------------------------------------------------------- */
 /* Tablet */
 @media screen and (min-width: 768px) {
