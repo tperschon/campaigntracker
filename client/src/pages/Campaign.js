@@ -54,7 +54,7 @@ const Campaign = (props) => {
     // Stand-in CSS
     <div className="campaign container">
       <div className="players container">
-        <h2>Players Participating</h2>
+        <h2>{(isAdmin && !campaignLoading) ? (<div>Invite Code: <span className="jcode">{campaignData.campaign.jCode}</span></div>) : ('')}Players Participating</h2>
         <h4>
           {campaignLoading ? ("Players loading") : campaignData.campaign.players.map((player, i) => <PlayerCard username={player.username} key={i} index={i} />)}
         </h4>
