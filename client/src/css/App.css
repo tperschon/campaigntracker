@@ -121,6 +121,12 @@ nav {
   padding-left: 0.4%;
 }
 
+.new-campaign-input {
+  width: 150%;
+  text-align: center;
+  margin: 15px;
+}
+
 .submit-btn {
   background-color: rgb(53, 141, 255);
   color: antiquewhite;
