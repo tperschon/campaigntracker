@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
 function CampaignCard(props) {
   const { campaign } = props;
   return (
@@ -9,5 +8,4 @@ function CampaignCard(props) {
   </div>
   );
 }
-
 export default CampaignCard;

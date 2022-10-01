@@ -36,7 +36,13 @@ const Dashboard = () => {
           <a className='redirect' href='/join'>Join A Campaign</a>
         </div>
       </div>
-      {data.getUserCampaigns.map((c, i)=> <CampaignCard campaign={c} key={i}/>)}
+      
+      <div className='campaign-container'>
+        <ul>
+          {data.getUserCampaigns.map((c, i)=> <CampaignCard campaign={c} key={i}/>)}
+        </ul>
+         
+      </div>
     </div>
   )
 }
