@@ -25,8 +25,7 @@ function NewCampaign() {
         }
         
       });
-     window.location.assign(`/campaigns/${mutationResponse.data.addCampaign._id}`)
-     console.log(mutationResponse.data.addCampaign._id);
+     window.location.assign(`/campaigns/${mutationResponse.data.addCampaign._id}`);
     
     } catch (error) {
       console.log('++++++++++ New Campaign Error')

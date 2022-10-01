@@ -1,10 +1,11 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function CampaignCard(props, key) {
   const { campaign } = props;
   return (
   <div>
-    <h2>{campaign.name}</h2>
+    <Link to={`/campaigns/${campaign._id}`}><h2>{campaign.name}</h2></Link>
   </div>
   );
 }
