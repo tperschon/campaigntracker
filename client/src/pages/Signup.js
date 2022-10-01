@@ -19,8 +19,8 @@ function Signup(props) {
         email: formState.email,
         password: formState.password,
       }
-
     });
+    
     console.log(mutationResponse);
     const token = mutationResponse.data.addUser.token;
     Auth.login(token);

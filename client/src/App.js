@@ -14,6 +14,9 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Campaign from './pages/Campaign';
 import Nav from './components/Nav';
+import Dashboard from './pages/Dashboard';
+import Create from './pages/Create';
+
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -54,9 +57,18 @@ function App() {
               element={<Signup />}
             />
             <Route
-              path="/campaigns"
+              path="/campaigns/:id"
               element={<Campaign />}
             />
+            <Route
+              path="/dashboard"
+              element={<Dashboard />}
+            />
+            <Route
+              path="/create"
+              element={<Create />}
+            />
+            
             {/* /campaigns/:id? */}
           </Routes>
         </div>

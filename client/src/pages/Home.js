@@ -15,7 +15,7 @@ const Home = () => {
       Auth.loggedIn()?(
         <div className="container">
         {/* Return differently if logged in vs not. */}
-        <h3>Dashboard</h3>
+        <h3>Homepage Blog</h3>
         {campaigns.map((campaign) => (<li>{campaign}</li>))}
       
       </div>
