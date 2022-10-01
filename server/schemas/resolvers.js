@@ -110,13 +110,29 @@ const resolvers = {
     //   await user.populate({path: 'campaigns', model: Campaign, populate: [{path: 'admins', model: User}]});
     //   return { user, campaign };
     // },
+    // joinCampaign: async (parent, { jCode }, context) => {
+    //   const campaign = await Campaign.find({ where: { jCode: jCode }});
+    //   const user = await User.findByIdAndUpdate(
+    //     { _id: context.user._id},
+    //     { "$push": { campaigns: campaign }}
+    //   );
+    //   await campaign.updateOne({ "$push": { players: user}});
+    //   return { user, campaign};
+    // },
     joinCampaign: async (parent, { jCode }, context) => {
-      const campaign = await Campaign.find({ where: { jCode: jCode }});
+
+      const campaign = await Campaign.findOne({ where: { jCode: jCode }});
+      
       const user = await User.findByIdAndUpdate(
         { _id: context.user._id},
-        { "$push": { campaigns: campaign }}
+        { "$push": { campaigns: campaign._id }}
       );
-      await campaign.updateOne({player: user});
+      console.log("user: ", context.user._id)
+      console.log("campaign: ", campaign)
+      const updatedCampaign = await Campaign.findByIdAndUpdate(
+        { _id: campaign._id },
+        { "$push": { players: user._id}}
+      );
       return { user, campaign};
     },
     addNote: async (parent, { title, text, campaignId }, context) => {

@@ -39,7 +39,10 @@ const Dashboard = () => {
       </div>
       
       <div className='campaign-container'>
-        {data.getUserCampaigns.map((c, i)=> <CampaignCard campaign={c} key={i}/>)}
+        <ul>
+          {data.getUserCampaigns.map((c, i)=> <CampaignCard campaign={c} key={i}/>)}
+        </ul>
+         
       </div>
     </div>
   )

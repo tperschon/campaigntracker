@@ -20,8 +20,10 @@ function Join () {
         }
         
       });
-      console.log('hello 2')
-    // window.location.assign(`/campaigns/${mutationResponse.data.joinCampaign._id}`)
+      console.log('campaign data', mutationResponse.data)
+
+      
+      window.location.assign(`/campaigns/${mutationResponse.data.joinCampaign.campaign._id}`)
     
     
     } catch (error) {

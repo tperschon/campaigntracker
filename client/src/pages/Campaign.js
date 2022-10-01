@@ -29,16 +29,27 @@ const Campaign = (props) => {
     <div className="campaign container">
       {/* {(notesLoading || campaignLoading) ? } */}
       <div className="players container">
+        
         <h2>Players Participating</h2>
-        <ul>
-          {campaignLoading ? ("Players loading") : campaignData.campaign.players.map(player => <li>{player.username}</li>)}
-        </ul>
+        
+        <div className='player-container'>
+          
+          <ul>
+            {campaignLoading ? ("Players loading") : campaignData.campaign.players.map(player => <li>{player.username}</li>)}
+          </ul>
+       
+        </div>
+        
       </div>
-      <div className="notes container">
-        <h2>Notes</h2>
+
+      <h2>Notes</h2>
+      
+      <div className="notes-container">
+
         <ul>
           {notesLoading ? ("Notes Loading") : ("Notes")}
         </ul>
+      
       </div>
     </div>
   );
