@@ -51,7 +51,7 @@ const typeDefs = gql`
   type Query {
     user: User
     campaign(campaignId: ID!): Campaign
-    getUserCampaigns: [Campaign]
+    getUserCampaigns(userId: ID!): [Campaign]
     # notes: [Note]
     getCampaignNotes(campaignId: ID!): [Note]
   }

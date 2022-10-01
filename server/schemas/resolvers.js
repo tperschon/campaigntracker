@@ -30,9 +30,9 @@ const resolvers = {
         }
         return campaign;
     },
-    getUserCampaigns: async (parent, args, context) => {
-      const user = await User.findById(context.user._id)
-      .populate({path: 'campaigns', model: Campaign});
+    getUserCampaigns: async (parent, { userId }, context) => {
+      const user = await User.findById(userId);
+      user.populate({path: 'campaigns', model: Campaign});
       return user.campaigns;
     },
     // notes: async (parent, args, context) => {
@@ -47,7 +47,9 @@ const resolvers = {
       if (context.user) {
         const notes = await Note.find({ where: { campaign: { _id: id }}})
         .populate({path: 'creator', model: User});
-        return notes;
+        if(notes) return notes;
+        else return [];
+        
       }
       throw new AuthenticationError('Not logged in')
     }
@@ -70,8 +72,8 @@ const resolvers = {
       };
       const user = await User.findById(context.user._id);
       const newCampaign = {...args, admins: [user._id]};
-      const campaign = await Campaign.create(newCampaign)
-      .populate('admins');
+      const campaign = await Campaign.create(newCampaign);
+      await campaign.populate({path:'admins', model: User});
       console.log(campaign);
       return campaign;
     },

@@ -8,12 +8,15 @@ import NoteCard from '../components/NoteCard';
 
 // File name may need to be changed to be more accurate.
 
-const Campaign = async (props) => {
-  const campaignId = useParams();
+const Campaign = (props) => {
+  const { id: campaignId} = useParams();
   const { data: { username, _id: userId }} = Auth.getProfile();
-  console.log(campaignId, userId);
-  const {loading, error, data} = await useQuery(QUERY_CAMPAIGN, { variables: { campaignId: campaignId}});
-  console.log(loading, error, data)
+  const { loading: campaignLoading, error: campaignError, data: campaignData } = useQuery(QUERY_CAMPAIGN, { variables: { campaignId: campaignId}});
+  const { loading: notesLoading, error: notesError, data: notesData } = useQuery(GET_CAMPAIGN_NOTES, { variables: { campaignId: campaignId}});
+  if(!campaignLoading) console.log(campaignData.campaign.players)
+  if(!notesLoading) console.log(notesData)
+  //console.log(notesData)
+  // console.log(notesData)
   // console.log(Auth.getUser())
   // const [campaign] = useQuery(QUERY_CAMPAIGN, { variables: { campaignId: props.campaign._id} });
   // console.log(campaign)
@@ -24,13 +27,17 @@ const Campaign = async (props) => {
   return (
     // Stand-in CSS
     <div className="campaign container">
-      <div className="notes container">
-        {1}
-        {/* {notes.map(note => <NoteCard note/>)} */}
-      </div>
+      {/* {(notesLoading || campaignLoading) ? } */}
       <div className="players container">
+        <h2>Players Participating</h2>
         <ul>
-          {/* {campaign.players.map(player => <li>{player.username}</li>)} */}
+          {campaignLoading ? ("Players loading") : campaignData.campaign.players.map(player => <li>{player.username}</li>)}
+        </ul>
+      </div>
+      <div className="notes container">
+        <h2>Notes</h2>
+        <ul>
+          {notesLoading ? ("Notes Loading") : ("Notes")}
         </ul>
       </div>
     </div>

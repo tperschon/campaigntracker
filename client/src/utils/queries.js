@@ -33,8 +33,8 @@ export const QUERY_CAMPAIGN = gql`
   }`;
 // 
 export const GET_USER_CAMPAIGNS = gql`
-  query GetUserCampaigns {
-    getUserCampaigns {
+  query GetUserCampaigns($userId: ID!) {
+    getUserCampaigns(userId: $userID) {
       _id
       name
     }
