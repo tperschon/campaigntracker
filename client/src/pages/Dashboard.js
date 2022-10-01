@@ -12,8 +12,9 @@ import CampaignCard from "../components/CampaignCard/index"
 
 //add join campaign. add jcode to add user
 
-const DashboardPage = () => {
-  const id = 
+const Dashboard = () => {
+  const { data: { username, _id: id }} = Auth.getProfile();
+
   const {loading, error, data} = useQuery(GET_USER_CAMPAIGNS, {variables: {userId: id}});
 
   if (loading) {
@@ -23,8 +24,8 @@ const DashboardPage = () => {
   if (error) {
     console.error(error);
   }
-  console.log(data.getUserCampaigns)
-  return <CampaignCard campaign={data.getUserCampaigns}/>
+  console.log(data)
+  return <CampaignCard campaign={data}/>
   
   
 
@@ -58,4 +59,4 @@ const DashboardPage = () => {
 };
 
 
-export default DashboardPage;
+export default Dashboard;
