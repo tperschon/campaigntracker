@@ -1,10 +1,10 @@
 import React from "react";
 
-function CampaignCard(props) {
-
+function CampaignCard(props, key) {
+  const { campaign } = props;
   return (
   <div>
-    <h2>{props.name}</h2>
+    <h2>{campaign._id}</h2>
   </div>
   );
 }

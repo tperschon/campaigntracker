@@ -13,8 +13,8 @@ const Campaign = (props) => {
   const { data: { username, _id: userId }} = Auth.getProfile();
   const { loading: campaignLoading, error: campaignError, data: campaignData } = useQuery(QUERY_CAMPAIGN, { variables: { campaignId: campaignId}});
   const { loading: notesLoading, error: notesError, data: notesData } = useQuery(GET_CAMPAIGN_NOTES, { variables: { campaignId: campaignId}});
-  if(!campaignLoading) console.log(campaignData.campaign.players)
-  if(!notesLoading) console.log(notesData)
+  // if(!campaignLoading) console.log(campaignData.campaign.players)
+  // if(!notesLoading) console.log(notesData)
   //console.log(notesData)
   // console.log(notesData)
   // console.log(Auth.getUser())

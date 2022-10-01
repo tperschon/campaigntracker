@@ -23,8 +23,7 @@ const DashboardPage = () => {
   if (error) {
     console.error(error);
   }
-  console.log(data.getUserCampaigns)
-  return <CampaignCard campaign={data.getUserCampaigns}/>
+  return data.getUserCampaigns.map((c, i)=> <CampaignCard campaign={c} key={i}/>)
   
   
 

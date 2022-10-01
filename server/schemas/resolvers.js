@@ -18,12 +18,9 @@ const resolvers = {
     // get the campaign by the campaign.id in context
     campaign: async (parents, { campaignId }) => {
         let campaign = await Campaign.findById(campaignId);
-        const admins = await User.find({ where: { _id: { $in: campaign.admins }}});
-        const players = await User.find({ where: { _id: { $in: campaign.players }}});
-        campaign.admins = admins;
-        campaign.players= players;
-        // campaign.populate({path: 'admins', model: User});
-        // campaign.populate({path: 'players', model: User});
+        await campaign.populate({path: 'players', model: User});
+        await campaign.populate({path: 'admins', model: User});
+        console.log(campaign)
         if (!campaign) {
 
             throw new UserInputError('Campaign not found.');
@@ -33,6 +30,9 @@ const resolvers = {
     getUserCampaigns: async (parent, { userId }, context) => {
       const user = await User.findById(userId);
       user.populate({path: 'campaigns', model: Campaign});
+      const campaigns = user.campaigns;
+      console.log(user)
+      console.log(campaigns)
       return user.campaigns;
     },
     // notes: async (parent, args, context) => {
@@ -77,7 +77,6 @@ const resolvers = {
         { _id: context.user._id},
         { "$push": { campaigns: campaign }});
       await campaign.populate({path:'admins', model: User});
-      console.log(campaign);
       return campaign;
     },
     login: async (parent, { email, password }) => {
