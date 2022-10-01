@@ -57,7 +57,6 @@ function App() {
               path="/campaigns/:id"
               element={<Campaign />}
             />
-            {/* /campaigns/:id? */}
           </Routes>
         </div>
       </Router>

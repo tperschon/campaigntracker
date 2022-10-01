@@ -1,19 +1,19 @@
 import React, { createContext, useContext } from "react";
-import { useProductReducer } from './reducers'
+import { useNoteReducer } from "./reducers";
 
-const StoreContext = createContext();
-const { Provider } = StoreContext;
+const CampaignContext = createContext();
+const { Provider } = CampaignContext;
 
-const StoreProvider = ({ value = [], ...props }) => {
-  const [state, dispatch] = useProductReducer({
- //add your code here
+const CampaignProvider = ({ value = [], ...props }) => {
+  const [state, dispatch] = useNoteReducer({
+    notes: []
   });
 
   return <Provider value={[state, dispatch]} {...props} />;
 };
 
-const useStoreContext = () => {
-  return useContext(StoreContext);
+const useCampaignContext = () => {
+  return useContext(CampaignContext);
 };
 
-export { StoreProvider, useStoreContext };
+export { CampaignProvider, useCampaignContext };
