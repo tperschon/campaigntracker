@@ -13,6 +13,7 @@ export const QUERY_USER = gql`
       }
     }
   }`;
+
 // query for a specific campaign, returns a more comprehensive campaign object that includes all the players and admins by name alone
 export const QUERY_CAMPAIGN = gql`
   query Campaign($campaignId: ID!) {
