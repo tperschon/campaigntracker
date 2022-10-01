@@ -349,6 +349,14 @@ h3 {
   color: rgb(37, 187, 0);
 }
 
+.admin {
+  color: brown;
+}
+
+.player {
+  color: rgb(0, 153, 255);
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

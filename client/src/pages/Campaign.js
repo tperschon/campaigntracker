@@ -15,6 +15,7 @@ const Campaign = (props) => {
   const { id: campaignId } = useParams();
   // start off with no admin stuff
   let isAdmin = false;
+  let campaignAll = [];
   // extract state variable/setter, set state to blank to start
   const [formState, setFormState] = useState({ title: '', text: '' });
   // extract mutational function to add note as well as an error for it
@@ -25,6 +26,14 @@ const Campaign = (props) => {
   // once we're done loading campaign data, check if current user is an admin of campaign and if they are, set isAdmin to true
   if (!campaignLoading) {
     if (campaignData.campaign.admins.map(admin => admin._id).includes(id)) isAdmin = true;
+    for (let i = 0; i < campaignData.campaign.admins.length; i++) {
+      let obj = { player: campaignData.campaign.admins[i], type: 'admin'};
+      campaignAll.push(obj);
+    };
+    for (let i = 0; i < campaignData.campaign.players.length; i++) {
+      let obj = { player: campaignData.campaign.players[i], type: 'player'};
+      campaignAll.push(obj);
+    };
   };
   // keeps forms updated
   const handleChange = (event) => {
@@ -56,7 +65,7 @@ const Campaign = (props) => {
       <div className="players container">
         <h2>{(isAdmin && !campaignLoading) ? (<div>Invite Code: <span className="jcode">{campaignData.campaign.jCode}</span></div>) : ('')}Players Participating</h2>
         <h4>
-          {campaignLoading ? ("Players loading") : campaignData.campaign.players.map((player, i) => <PlayerCard username={player.username} key={i} index={i} />)}
+          {campaignLoading ? ("Players loading") : campaignAll.map((player, i) => <PlayerCard player={player} key={i} index={i} />)}
         </h4>
       </div>
       <div className="notes container">
