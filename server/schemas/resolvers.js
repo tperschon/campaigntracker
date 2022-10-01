@@ -29,10 +29,7 @@ const resolvers = {
     },
     getUserCampaigns: async (parent, { userId }, context) => {
       const user = await User.findById(userId);
-      user.populate({path: 'campaigns', model: Campaign});
-      const campaigns = user.campaigns;
-      console.log(user)
-      console.log(campaigns)
+      await user.populate({path: 'campaigns', model: Campaign});
       return user.campaigns;
     },
     // notes: async (parent, args, context) => {

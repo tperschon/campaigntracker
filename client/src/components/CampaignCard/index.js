@@ -4,7 +4,7 @@ function CampaignCard(props, key) {
   const { campaign } = props;
   return (
   <div>
-    <h2>{campaign._id}</h2>
+    <h2>{campaign.name}</h2>
   </div>
   );
 }
