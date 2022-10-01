@@ -5,6 +5,10 @@ function NoteCard(props) {
         <div>
             <h3>{props.title}</h3>
             <p>{props.text}</p>
+            <input
+                type="button"
+                value="Delete"
+            />
         </div>
     );
 };

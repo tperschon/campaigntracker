@@ -24,7 +24,6 @@ const Dashboard = () => {
   if (error) {
     console.error(error);
   }
-  console.log(data)
   return (
     <div className='container'>
       <div className="join-create-container">

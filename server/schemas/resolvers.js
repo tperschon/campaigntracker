@@ -20,7 +20,6 @@ const resolvers = {
         let campaign = await Campaign.findById(campaignId);
         await campaign.populate({path: 'players', model: User});
         await campaign.populate({path: 'admins', model: User});
-        console.log(campaign)
         if (!campaign) {
 
             throw new UserInputError('Campaign not found.');
@@ -89,27 +88,36 @@ const resolvers = {
       return { token, user };
     },
     joinCampaign: async (parent, { jCode }, context) => {
-      if (!context.user) {
-        console.log(`no user in context ${context.user}`);
-        throw new AuthenticationError('Invalid Token');
-      }
-      const campaign = await Campaign.findOne({jCode: jCode});
-      if (!campaign) {
-        console.log(`no campaign found for jCode: ${jCode}`)
-        throw new UserInputError('Invalid Code')
-      }
-      const user = await User.findById(context.user._id)
-      if (user.campaigns.find(e => e._id.toString() === campaign._id.toString())) {
-        console.log(`User: ${user._id} already has campaign: ${campaign._id}`)
-        throw new UserInputError("Campaign already exists");
-      }
-      campaign.players.push(user._id);
-      await campaign.save();
-      user.campaigns.push(campaign._id);
-      await user.save();
-      await user.populate({path: 'campaigns', model: Campaign, populate: [{path: 'admins', model: User}]});
-      return { user, campaign };
+      const campaign = await Campaign.find({ where: { jCode: jCode }});
+      const user = await User.findByIdAndUpdate(
+        { _id: context.user._ud},
+        { "$push": { campaigns: campaign }}
+      );
+      await campaign.updateOne({players: user});
+      return { user, campaign};
     },
+    // joinCampaign: async (parent, { jCode }, context) => {
+    //   if (!context.user) {
+    //     console.log(`no user in context ${context.user}`);
+    //     throw new AuthenticationError('Invalid Token');
+    //   }
+    //   const campaign = await Campaign.findOne({jCode: jCode});
+    //   if (!campaign) {
+    //     console.log(`no campaign found for jCode: ${jCode}`)
+    //     throw new UserInputError('Invalid Code')
+    //   }
+    //   const user = await User.findById(context.user._id)
+    //   if (user.campaigns.find(e => e._id.toString() === campaign._id.toString())) {
+    //     console.log(`User: ${user._id} already has campaign: ${campaign._id}`)
+    //     throw new UserInputError("Campaign already exists");
+    //   }
+    //   campaign.players.push(user._id);
+    //   await campaign.save();
+    //   user.campaigns.push(campaign._id);
+    //   await user.save();
+    //   await user.populate({path: 'campaigns', model: Campaign, populate: [{path: 'admins', model: User}]});
+    //   return { user, campaign };
+    // },
     addNote: async (parent, { title, text, campaignId }, context) => {
       if (!context.user) {
         console.log('Invalid Token');
