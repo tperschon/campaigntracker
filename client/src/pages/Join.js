@@ -11,18 +11,21 @@ function Join () {
     event.preventDefault();
 
     try {
+      console.log('hello')
       const mutationResponse = await joinCampaign({
         variables: {
           
-          jCode: formState.jcode
+          jCode: formState.jCode
   
         }
         
       });
-     window.location.assign(`/campaigns/${mutationResponse.data.addCampaign._id}`)
-     console.log(mutationResponse.data.addCampaign._id);
+      console.log('hello 2')
+    // window.location.assign(`/campaigns/${mutationResponse.data.joinCampaign._id}`)
+    
     
     } catch (error) {
+      //console.log(mutationResponse.data)
       console.log('++++++++++ Join Error')
     }
 
@@ -50,7 +53,7 @@ function Join () {
               <input
                 className='input-field jcode-input'
                 placeholder='Campaign jCode'
-                jCode = 'jCode'
+                name='jCode'
                 type='text'
                 onChange={handleChange}
               />
