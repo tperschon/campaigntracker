@@ -9,11 +9,7 @@ function Join () {
 
   const joinSubmit = async (event) => {
     event.preventDefault();
-    // const mutationResponse = await createCampaign({
-    //   variables: { 
-    //     name: formState.name
-    //   }
-    // });
+
     try {
       const mutationResponse = await joinCampaign({
         variables: {

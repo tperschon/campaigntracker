@@ -48,7 +48,7 @@ function Signup(props) {
               <input
                 className='input-field'
 
-                placeholder="youremailhere@email.com"
+                placeholder="your name here"
                 name="username"
                 type="text"
 
