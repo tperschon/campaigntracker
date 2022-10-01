@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
-import { Link } from 'react-router-dom';
 import { ADD_CAMPAIGN } from '../utils/mutations';
+//import { Link } from 'react-router-dom';
+
 
 function NewCampaign() {
 
@@ -10,15 +11,28 @@ function NewCampaign() {
 
   const campaignSubmit = async (event) => {
     event.preventDefault();
-    const mutationResponse = await createCampaign({
-      variables: {
+    // const mutationResponse = await createCampaign({
+    //   variables: { 
+    //     name: formState.name
+    //   }
+    // });
+    try {
+      const mutationResponse = await createCampaign({
+        variables: {
+          
+          name: formState.name
+  
+        }
         
-        name: formState.name
+      });
+     window.location.assign(`/campaigns/${mutationResponse.data.addCampaign._id}`)
+     console.log(mutationResponse.data.addCampaign._id);
+    
+    } catch (error) {
+      console.log('++++++++++ New Campaign Error')
+    }
 
-      }
-    });
-
-    console.log(mutationResponse);    
+    // console.log(mutationResponse);    
   };
 
   const handleChange = (event) => {
@@ -45,7 +59,7 @@ function NewCampaign() {
                 placeholder='New Campaign Name'
                 name='name'
                 type='text'
-                onchange={handleChange}
+                onChange={handleChange}
               />
             </div>
             <div className='flex'>

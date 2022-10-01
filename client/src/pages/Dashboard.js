@@ -1,37 +1,60 @@
 import React from "react";
 import Auth from '../utils/Auth';
 import { Link } from "react-router-dom";
+import { useQuery } from "@apollo/client";
+import { GET_USER_CAMPAIGNS } from "../utils/queries";
+import CampaignCard from "../components/CampaignCard/index"
+
 
 // run GET_USER_CAMPAIGN query
 //assign it to a variable
 //run a map method on the response variable
 
-
-
 //add join campaign. add jcode to add user
 
 const DashboardPage = () => {
-  const campaigns = []; 
-  return (
-  <>
-    {
-      Auth.loggedIn()?(
-        <div className="container">
-        {/* Return differently if logged in vs not. */}
-        <h3>List of Campaigns dashboard</h3>
+  const id = 
+  const {loading, error, data} = useQuery(GET_USER_CAMPAIGNS, {variables: {userId: id}});
 
-        {campaigns.map((campaign) => (<li>{campaign}</li>))}
+  if (loading) {
+    return <div>Leading...</div>;
+  }
+
+  if (error) {
+    console.error(error);
+  }
+  console.log(data.getUserCampaigns)
+  return <CampaignCard campaign={data.getUserCampaigns}/>
+  
+  
+
+  // return (
+  // <>
+  //   {
+  //     Auth.loggedIn()?(
+  //       <div className="container">
+  //       {/* Return differently if logged in vs not. */}
+  //       <h3 className='dashboard-header'>List of Campaigns dashboard</h3>
+        
+  //       <div className='dashboard-main-container heading-container'>
+          
+  //         <div className='campaign-name-container'>
+  //           <label>Campaign Name:</label>
+  //         </div>
+
+  //       </div>
+
+  //       {/* {campaigns.map((campaign) => (<li>{campaign}</li>))} */}
       
-      </div>
-      ):(
-        // Again, placeholder CSS
-        <div className="home-container">
-          {/* Return Lists of campaigns and characters. */}
-          <h3>Please <Link className="context-link" to="/login">login</Link> to view campaigns!</h3>
-        </div>)
-    }   
-  </>
-  )
+  //     </div>
+  //     ):(
+  //       // Again, placeholder CSS
+  //       <div className="home-container">
+  //         {/* Return Lists of campaigns and characters. */}
+  //       </div>)
+  //   }   
+  // </>
+  // )
 };
 
 

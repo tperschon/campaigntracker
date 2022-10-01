@@ -1,6 +1,6 @@
 import React from "react";
 import Auth from "../../utils/Auth";
-import Dash from "../Dashboard/index";
+import Dash from "../CampaignCard/index";
 import { Link } from "react-router-dom";
 
 // Nav component

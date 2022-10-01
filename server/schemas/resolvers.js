@@ -71,7 +71,7 @@ const resolvers = {
       const user = await User.findById(context.user._id);
       const newCampaign = {...args, admins: [user._id]};
       const campaign = await Campaign.create(newCampaign)
-      .populate('admins');
+      campaign.populate('admins');
       console.log(campaign);
       return campaign;
     },

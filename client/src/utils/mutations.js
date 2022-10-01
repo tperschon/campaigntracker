@@ -18,7 +18,6 @@ export const ADD_CAMPAIGN = gql`
     addCampaign(name: $name) {
       _id
       name
-      note
       admins {
         _id
       }
