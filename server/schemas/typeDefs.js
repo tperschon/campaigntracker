@@ -61,7 +61,7 @@ const typeDefs = gql`
     addCampaign(name: String!): Campaign
     joinCampaign(jCode: String!): UserCampaign
     login(email: String!, password: String!): Auth
-    addNote(title: String!, noteType: String, text: String!, campaignId: ID!): Note
+    addNote(title: String!, text: String!, campaignId: ID!): Note
     removeNote(id: ID!): Note
   }
 `;

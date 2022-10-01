@@ -1,10 +1,10 @@
 import React from "react";
 
 function PlayerCard(props) {
-    const isStart = props.key === 0 ? true : false;
+    const isStart = props.index === 0 ? true : false;
     return (
         <div>
-            <span>{isStart ? (" - ") : ("  ")}{props.username}</span>
+            <span>{!isStart ? (" - ") : ("  ")}{props.username}</span>
         </div>
     );
 };
