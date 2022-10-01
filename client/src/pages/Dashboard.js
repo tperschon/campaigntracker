@@ -13,7 +13,7 @@ import CampaignCard from "../components/CampaignCard/index"
 //add join campaign. add jcode to add user
 
 const DashboardPage = () => {
-  const id = 
+  const { data: { username, _id: id }} = Auth.getProfile();
   const {loading, error, data} = useQuery(GET_USER_CAMPAIGNS, {variables: {userId: id}});
 
   if (loading) {

@@ -34,7 +34,7 @@ export const QUERY_CAMPAIGN = gql`
 // 
 export const GET_USER_CAMPAIGNS = gql`
   query GetUserCampaigns($userId: ID!) {
-    getUserCampaigns(userId: $userID) {
+    getUserCampaigns(userId: $userId) {
       _id
       name
     }
