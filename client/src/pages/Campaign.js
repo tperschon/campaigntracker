@@ -26,16 +26,21 @@ const Campaign = (props) => {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     try {
+      console.log('try')
+      console.log(formState.title, formState.text, campaignId)
         const noteAdded = await addNote({
-            variables: {
+          variables: {
                 title: formState.title,
                 text: formState.text,
-                campaign: campaignId
-            }
+                campaignId: campaignId
+          }
         });
+        console.log('try2')
         console.log(noteAdded);
+        window.location.assign(`/campaigns/${campaignId}`);
     } catch (err) {
         console.log(err);
+        window.location.assign(`/campaigns/${campaignId}`);
     }
 };
   return (
@@ -50,7 +55,7 @@ const Campaign = (props) => {
       <div className="notes container">
         <h2>Notes</h2>
         <ul>
-          {notesLoading ? ("Notes Loading") : notesData.getCampaignNotes.map((note, i) => <NoteCard title={note.title} text={note.text} _id={note._id} key={i}/>)}
+          {(notesLoading) ? ("Notes Loading") : notesData.getCampaignNotes.map((note, i) => <NoteCard title={note.title} text={note.text} _id={note._id} key={i}/>)}
         </ul>
         <div>
             <form className="noteform" onSubmit={handleFormSubmit}>

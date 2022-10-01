@@ -123,6 +123,7 @@ const resolvers = {
     //   return { user, campaign };
     // },
     addNote: async (parent, { title, text, campaignId }, context) => {
+      console.log("run")
       if (!context.user) {
         console.log('Invalid Token');
         throw new AuthenticationError('Invalid Token');

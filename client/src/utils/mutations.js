@@ -57,8 +57,8 @@ export const LOGIN = gql`
 
 // Add a Note
 export const ADD_NOTE = gql`
-  mutation AddNote($title: String!, $text: String!, $campaign: ID!) {
-    addNote(title: $title, text: $text, campaign: $campaign) {
+  mutation addNote($title: String!, $text: String!, $campaignId: ID!) {
+    addNote(title: $title, text: $text, campaignId: $campaignId) {
       _id
       title
       text
@@ -72,7 +72,7 @@ export const ADD_NOTE = gql`
   }`;
 
 export const REMOVE_NOTE = gql`
-  mutation RemoveNote($removeNoteId: ID!) {
+  mutation removeNote($removeNoteId: ID!) {
     removeNote(id: $removeNoteId) {
       _id
     }
