@@ -88,7 +88,7 @@ const Campaign = (props) => {
                 placeholder="Text"
                 onChange={handleChange}
               /><br></br>
-              <input
+              <input className='submit-note'
                 type="submit"
                 value="Create Note"
               />
