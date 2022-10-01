@@ -22,11 +22,10 @@ const Campaign = (props) => {
   // pull our data for the campaign and its notes
   const { loading: campaignLoading, error: campaignError, data: campaignData } = useQuery(QUERY_CAMPAIGN, { variables: { campaignId: campaignId } });
   const { loading: notesLoading, error: notesError, data: notesData } = useQuery(GET_CAMPAIGN_NOTES, { variables: { campaignId: campaignId } });
+  // once we're done loading campaign data, check if current user is an admin of campaign and if they are, set isAdmin to true
   if(!campaignLoading) {
-    const adminIds = campaignData.campaign.admins.map(admin => admin._id);
-    if(adminIds.includes(id)) isAdmin = true;
-  }
-
+    if(campaignData.campaign.admins.map(admin => admin._id).includes(id)) isAdmin = true;
+  };
   // keeps forms updated
   const handleChange = (event) => {
     const { name, value } = event.target;
