@@ -26,8 +26,15 @@ const campaignSchema = new Schema({
   jCode: {
     type: String,
     required: true,
-    default: generateCode()
+    default: 'code'
   }
+});
+// ensure jCodes are not the same for every campaign for every time the server rebuilds
+campaignSchema.pre('save', async function (next) {
+  if (this.isNew) {
+    this.jCode = generateCode();
+  }
+  next();
 });
 
 const Campaign = mongoose.model('Campaign', campaignSchema);
